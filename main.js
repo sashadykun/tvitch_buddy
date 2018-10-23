@@ -23,7 +23,7 @@ var gameData = [];
 
 function init () {
    getOnlinePlayers();
-   getDotaPlayers();
+   
 }
 
 
@@ -86,21 +86,21 @@ function makeOnlinePlayerObj(response){
 
 
         console.log(response);
-    }
+    }}
     
-function getDotaPlayers(){
+function getDotaPlayers(player){
    var accountInfo = {
-      "url": "https://api.opendota.com/api/players/"+dotaPlayers,
+      "url": "https://api.opendota.com/api/players/"+player,
       "method": "GET"
     }
 
     var winLoss = {
-       "url": "https://api.opendota.com/api/players/"+dotaPlayers+"/wl",
+       "url": "https://api.opendota.com/api/players/"+player+"/wl",
        "method": "GET"
     }
 
     var previousGame = {
-      "url": "https://api.opendota.com/api/players/"+dotaPlayers+"/matches",
+      "url": "https://api.opendota.com/api/players/"+player+"/matches",
       "method": "GET"
     }
     
@@ -166,10 +166,9 @@ function detFortnitePlayerData(playerName) {
 
 
 function renderLivePlayersOnDom() {
-    console.log("render dom ran 1");
-    console.log(onlinePlayerArray.length);
+    
     for (var i=0; i<onlinePlayerArray.length;i++){
-        console.log("render dom ran 2");
+        
         var playerCard = $("<div>").addClass("playerCard").css({
             "background-image": "url("+onlinePlayerArray[i].thumbnail+")",
         })
