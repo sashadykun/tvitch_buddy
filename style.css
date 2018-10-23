@@ -1,0 +1,17 @@
+.container {
+    display: inline-block;
+    height: 50vh;
+    width: 50vw;
+}
+#twitchPlayer {
+    display: inline-block;
+
+    height:300px;
+    width: 50px;
+}
+#winStat {
+    float: right;
+    width: 10vw;
+    height: 5vh;
+    border: black solid 3px;
+}
