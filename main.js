@@ -4,11 +4,17 @@ var arrayOfPlayers = ["ninja", "nickmercs", "shroud", "drdisrespectlive",];
 var arrayCommaString = arrayOfPlayers.join();
 var twitchStreamer = "ninja";
 var onlinePlayerArray = [];
+var dotaPlayers = {
+  masondota2: "315657960",
+  dendi: "70388657",
+  arteezy: "104070670",
+  sexyBamboe: "20321748",
+  singsing: "97577101"
+}
 
 function init () {
-    getOnlinePlayers()
-    
-    console.log("online array works"+onlinePlayerArray.length);
+   getOnlinePlayers();
+   getDotaPlayers();
 }
 
 function getOnlinePlayers(){
@@ -47,8 +53,45 @@ function makeOnlinePlayerObj(response){
         console.log(response);
     }
     
+function getDotaPlayers(){
+   var accountInfo = {
+      "url": "https://api.opendota.com/api/players/"+dotaPlayers,
+      "method": "GET"
+    }
 
+    var winLoss = {
+       "url": "https://api.opendota.com/api/players/"+dotaPlayers+"/wl",
+       "method": "GET"
+    }
+
+    var previousGame = {
+      "url": "https://api.opendota.com/api/players/"+dotaPlayers+"/matches",
+      "method": "GET"
+    }
+    
+    $.ajax(accountInfo).done(function (response) {
+      dotaPlayers.soloRank = response.solo_competitive_rank
+    });
+
+    $.ajax(winLoss).done(function (response2) {
+      dotaPlayers.wins = response2.win;
+      dotaPlayers.loses = response2.lose;
+    });
+
+    $.ajax(previousGame).done(function (response3) {
+      dotaPlayers.kills = response3[0].kills;
+      dotaPlayers.deaths = response3[0].deaths;
+      dotaPlayers.assists = response3[0].assists;
+      if(response3[0].radiant_win === false){
+        dotaPlayers.win = "lost"
+      }else{
+        dotaPlayers.win = "win"
+      }
+      console.log(dotaPlayers)
+    });
 }
+
+
 
 function renderLivePlayersOnDom() {
     console.log("render dom ran 1");
@@ -61,3 +104,4 @@ function renderLivePlayersOnDom() {
         $("#livePlayers").append(playerCard);
     }
 }
+
