@@ -19,13 +19,14 @@ var bfPlayers = {
     misterkaiser: 'Mister_Kaiser',
     mistersamonte: 'MisterSamonte'
 }
-var gameData = [];
+var gameDataBf;
+var gameDataFortNite;
+var gameDataDota; 
 
 function init () {
    getOnlinePlayers();
-   
+   getBfPlayerData('TwistyDoesntMlSS')
 }
-
 
 function getBfPlayerData (player) {
     var ajaxConfig = {
@@ -40,17 +41,18 @@ function getBfPlayerData (player) {
         "TRN-Api-Key": "2e1d6fb9-7bd6-4cd5-8121-2eeb037845eb"
         },
         success: function (response) {
-            gameData = response;
-            var wins = gameData.result.basicStats.wins;
-            var losses = gameData.result.basicStats.losses;
-            var kills = gameData.result.basicStats.kills;
-            var deaths = gameData.result.basicStats.deaths;
-            var accuracyRatio = gameData.result.accuracyRatio;
-            console.log(wins, losses, kills, deaths, accuracyRatio)
+            var wins = response.result.basicStats.wins;
+            var losses = response.result.basicStats.losses;
+            var kills = response.result.basicStats.kills;
+            var deaths = response.result.basicStats.deaths;
+            var accuracyRatio = response.result.accuracyRatio;
+            gameDataBf = {'Player': player, 'Wins': wins, 'Losses': losses, 'Kills': kills, 'Deaths': deaths, 'Accuracy Ratio': accuracyRatio} 
+            console.log(gameDataBf)
         }
     }
     $.ajax(ajaxConfig)
 }
+
 
 function getOnlinePlayers(){
     var settings = {
