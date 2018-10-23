@@ -21,11 +21,12 @@ var bfPlayers = {
 }
 var gameDataBf;
 var gameDataFortNite;
-var gameDataDota; 
+var gameDataDota = {}; 
 
 function init () {
    getOnlinePlayers();
    getBfPlayerData('TwistyDoesntMlSS')
+   getDotaPlayers("315657960");
 }
 
 function getBfPlayerData (player) {
@@ -91,6 +92,7 @@ function makeOnlinePlayerObj(response){
     }}
     
 function getDotaPlayers(player){
+    gameDataDota.Player = player;
    var accountInfo = {
       "url": "https://api.opendota.com/api/players/"+player,
       "method": "GET"
@@ -107,24 +109,24 @@ function getDotaPlayers(player){
     }
     
     $.ajax(accountInfo).done(function (response) {
-      dotaPlayers.soloRank = response.solo_competitive_rank
+        gameDataDota.SoloRank = response.solo_competitive_rank
     });
 
     $.ajax(winLoss).done(function (response2) {
-      dotaPlayers.wins = response2.win;
-      dotaPlayers.loses = response2.lose;
+        gameDataDota.Wins = response2.win;
+        gameDataDota.Loses = response2.lose;
     });
 
     $.ajax(previousGame).done(function (response3) {
-      dotaPlayers.kills = response3[0].kills;
-      dotaPlayers.deaths = response3[0].deaths;
-      dotaPlayers.assists = response3[0].assists;
+        gameDataDota.Kills = response3[0].kills;
+        gameDataDota.Deaths = response3[0].deaths;
+        gameDataDota.Assists = response3[0].assists;
       if(response3[0].radiant_win === false){
-        dotaPlayers.win = "lost"
+        gameDataDota.Win = "lost"
       }else{
-        dotaPlayers.win = "win"
+        gameDataDota.Win = "win"
       }
-      console.log(dotaPlayers)
+      console.log('DATA',gameDataDota)
     });
 }
 
