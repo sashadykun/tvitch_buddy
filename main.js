@@ -35,8 +35,8 @@ var fortniteTopPlayers = {
     CourageJD: 'CourageJD',
     Dakotaz: 'Dakotaz',
     Ranger: 'WBG Ranger',
-    SypherPK: 'SypherPK'
-
+    SypherPK: 'SypherPK',
+    Gen_Odyssey: 'Gen-Odyssey'
 }
 
 
@@ -44,12 +44,7 @@ var fortniteTopPlayers = {
 //     froggen: '71899217'
 // }
 
-//detFortnitePlayerData('NickMercs');
-
-
-var gameData = [];
-
-
+//var gameData = [];
 var gameDataBf;
 var gameDataDota = {}; 
 var gameDataLeague = {};
@@ -70,8 +65,6 @@ function createAllPlayersArray(firstArray, secondArray, thirdArray){
         arrayOfPlayers.push(...Object.keys(newArray[arrayIndex]));
 
     }
-    
-
 }
 
 function getBfPlayerData (player) {
@@ -131,10 +124,6 @@ function makeOnlinePlayerObj(response){
         tempPlayerObj.thumbnail = thumbnail;
         tempPlayerObj.displayName = displayName;
         onlinePlayerArray.push(tempPlayerObj);
-
-        //console.log(response);
-        //console.log('GAME: ', onlinePlayerArray);
-
     }}
     
 function getDotaPlayers(player){
@@ -176,8 +165,6 @@ function getDotaPlayers(player){
     });
 }
 
-var fortnitePlayersData = [];
-
 function getFortnitePlayerData(playerName) {
     var settings = {
         "async": true,
@@ -213,7 +200,6 @@ function getFortnitePlayerData(playerName) {
 
 
 function renderLivePlayersOnDom() {
-    
     for (let i=0; i<onlinePlayerArray.length;i++){
         
         let playerCard = $("<div>", {
@@ -229,8 +215,26 @@ function renderLivePlayersOnDom() {
         },
         appendTo: $("#livePlayers"),
         })
+
+        let nameCard = $("<div>",{
+            addClass: "nameCard",
+            appendTo: playerCard
+        })
+
+        let displayName = $("<div>",{
+            addClass: "name",
+            text:onlinePlayerArray[i].displayName,
+            appendTo: nameCard
+        })
+
+        let displayGame = $("<div>",{
+            addClass: "game",
+            text:onlinePlayerArray[i].game,
+            appendTo: nameCard
+        })
     }
 }
+
 function displayVideo(twitchName) {
     $('.container').empty();
     console.log(twitchName);
