@@ -270,6 +270,7 @@ function displayVideo(twitchName) {
     $('iframe').remove();
     $('#stats').remove();
     $('#footerContainer').remove();
+    $('#headerContainer').remove();
     $('#livePlayers').attr("id","livePlayers2");
     $('.playerCard').removeClass('playerCard').addClass('playerCard2')
     console.log(twitchName);
