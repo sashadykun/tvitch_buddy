@@ -32,14 +32,21 @@ var fortniteTopPlayers = {
     'SypherPK': 'SypherPK'
 
 }
+
 detFortnitePlayerData('NickMercs');
 
 
 var gameData = [];
 
+var gameDataBf;
+var gameDataFortNite;
+var gameDataDota = {}; 
+
+
 function init () {
    createAllPlayersArray(dotaPlayers, bfPlayers, fortniteTopPlayers);
    getOnlinePlayers();
+
    console.log('online: ', onlinePlayerArray);
    
 }
@@ -51,6 +58,11 @@ function createAllPlayersArray(firstArray, secondArray, thirdArray){
 
     }
 
+}
+
+
+   getBfPlayerData('TwistyDoesntMlSS')
+   getDotaPlayers("315657960");
 }
 
 
@@ -67,17 +79,18 @@ function getBfPlayerData (player) {
         "TRN-Api-Key": "2e1d6fb9-7bd6-4cd5-8121-2eeb037845eb"
         },
         success: function (response) {
-            gameData = response;
-            var wins = gameData.result.basicStats.wins;
-            var losses = gameData.result.basicStats.losses;
-            var kills = gameData.result.basicStats.kills;
-            var deaths = gameData.result.basicStats.deaths;
-            var accuracyRatio = gameData.result.accuracyRatio;
-            console.log(wins, losses, kills, deaths, accuracyRatio)
+            var wins = response.result.basicStats.wins;
+            var losses = response.result.basicStats.losses;
+            var kills = response.result.basicStats.kills;
+            var deaths = response.result.basicStats.deaths;
+            var accuracyRatio = response.result.accuracyRatio;
+            gameDataBf = {'Player': player, 'Wins': wins, 'Losses': losses, 'Kills': kills, 'Deaths': deaths, 'Accuracy Ratio': accuracyRatio} 
+            console.log(gameDataBf)
         }
     }
     $.ajax(ajaxConfig)
 }
+
 
 function getOnlinePlayers(){
     var arrayCommaString = arrayOfPlayers.join();
@@ -117,6 +130,7 @@ function makeOnlinePlayerObj(response){
     }}
     
 function getDotaPlayers(player){
+    gameDataDota.Player = player;
    var accountInfo = {
       "url": "https://api.opendota.com/api/players/"+player,
       "method": "GET"
@@ -133,24 +147,24 @@ function getDotaPlayers(player){
     }
     
     $.ajax(accountInfo).done(function (response) {
-      dotaPlayers.soloRank = response.solo_competitive_rank
+        gameDataDota.SoloRank = response.solo_competitive_rank
     });
 
     $.ajax(winLoss).done(function (response2) {
-      dotaPlayers.wins = response2.win;
-      dotaPlayers.loses = response2.lose;
+        gameDataDota.Wins = response2.win;
+        gameDataDota.Loses = response2.lose;
     });
 
     $.ajax(previousGame).done(function (response3) {
-      dotaPlayers.kills = response3[0].kills;
-      dotaPlayers.deaths = response3[0].deaths;
-      dotaPlayers.assists = response3[0].assists;
+        gameDataDota.Kills = response3[0].kills;
+        gameDataDota.Deaths = response3[0].deaths;
+        gameDataDota.Assists = response3[0].assists;
       if(response3[0].radiant_win === false){
-        dotaPlayers.win = "lost"
+        gameDataDota.Win = "lost"
       }else{
-        dotaPlayers.win = "win"
+        gameDataDota.Win = "win"
       }
-      console.log(dotaPlayers)
+      console.log('DATA',gameDataDota)
     });
 }
 
