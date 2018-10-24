@@ -251,6 +251,7 @@ function renderLivePlayersOnDom() {
 function displayVideo(twitchName) {
     $('iframe').remove();
     $('#stats').remove();
+    $('#footerContainer').remove();
     $('#livePlayers').attr("id","livePlayers2");
     console.log(twitchName);
     var createIframe = $('<iframe>', {
