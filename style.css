@@ -36,9 +36,9 @@ body {
 } */
 #livePlayers2 {
     display: flex;
-    height: 20%;
+    height: 25%;
     width: 100%;
-    padding-bottom: 3px;
+    
     
 }
 #livePlayers {
@@ -52,24 +52,45 @@ body {
     display: flex;
     cursor: pointer;
     height: 100%;
-    width: 45%;
+    width: 25%;
     background-size: cover;
+    
     overflow: hidden;
 }
+
+.playerCard2 {
+    display: flex;
+    cursor: pointer;
+    height: 100%;
+    width: 20%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    overflow: hidden;
+    
+}
+
 
 .playerCard:hover{
     opacity: 0.80;
 }
 
 .playerCard:hover > .nameCard{
-    top: 70%;
+    top: 65%;
 }
 
+.playerCard2:hover{
+    opacity: 0.80;
+}
+
+.playerCard2:hover > .nameCard{
+    top: 65%;
+}
 .nameCard{
-    height: 30%;
+    height: 35%;
     width: 100%;
 
-    top: 99%;
+    top: 100%;
     position: relative;
     text-align: center;
     color:white;
