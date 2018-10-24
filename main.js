@@ -15,7 +15,13 @@ var dotaPlayers = {
     arteezy: "104070670",
     SexyBamboe: "20321748",
     singsing: "97577101",
-    darskyl: "161444478"
+    darskyl: "161444478",
+    GranDGranT: '137857496',
+    Dota2ruhub2: '871228094'
+
+
+
+
 }
 
 var bfPlayers = {
@@ -24,7 +30,8 @@ var bfPlayers = {
     Boccarossa13: 'Boccarossa',
     misterkaiser: 'Mister_Kaiser',
     mistersamonte: 'MisterSamonte',
-    Gen_Odyssey: 'Gen-Odyssey'
+    Gen_Odyssey: 'Gen-Odyssey',
+    th1r3een: 'l---th1r3een---I'
 };
 
 var fortniteTopPlayers = {
@@ -200,6 +207,9 @@ function getFortnitePlayerData(playerName) {
 
 
 function renderLivePlayersOnDom() {
+
+    onlinePlayerArray.sort(function (a, b) {return 0.5 - Math.random()});
+
     for (let i=0; i<onlinePlayerArray.length;i++){
         
         let playerCard = $("<div>", {
