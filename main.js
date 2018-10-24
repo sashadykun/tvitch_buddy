@@ -1,9 +1,10 @@
 $(document).ready(init);
 
-var arrayOfPlayers = ["ninja", "nickmercs", "shroud", "drdisrespectlive",];
-var arrayCommaString = arrayOfPlayers.join();
+var arrayOfPlayers = [];
+
 var twitchStreamer = "ninja";
 var onlinePlayerArray = [];
+
 var dotaPlayers = {
   masondota2: "315657960",
   dendi: "70388657",
@@ -18,12 +19,38 @@ var bfPlayers = {
     Boccarossa13: 'Boccarossa',
     misterkaiser: 'Mister_Kaiser',
     mistersamonte: 'MisterSamonte'
+};
+var fortniteTopPlayers = {
+    'Ninja': 'Ninja',
+    'NickMercs': 'NICKMERCS',
+    'TwitchProspering': 'TwitchProspering',
+    'twitch_bogdanakh': 'twitch_bogdanakh',
+    'TSM_Myth': 'TSM_Myth',
+    'CourageJD': 'CourageJD',
+    'Dakotaz': 'Dakotaz',
+    'Ranger': 'WBG Ranger',
+    'SypherPK': 'SypherPK'
+
 }
+detFortnitePlayerData('NickMercs');
+
+
 var gameData = [];
 
 function init () {
+   createAllPlayersArray(dotaPlayers, bfPlayers, fortniteTopPlayers);
    getOnlinePlayers();
+   console.log('online: ', onlinePlayerArray);
    
+}
+
+function createAllPlayersArray(firstArray, secondArray, thirdArray){
+    var newArray = [firstArray,secondArray,thirdArray]
+    for (var arrayIndex = 0; arrayIndex < newArray.length; arrayIndex++){
+        arrayOfPlayers.push(...Object.keys(newArray[arrayIndex]));
+
+    }
+
 }
 
 
@@ -53,6 +80,7 @@ function getBfPlayerData (player) {
 }
 
 function getOnlinePlayers(){
+    var arrayCommaString = arrayOfPlayers.join();
     var settings = {
         "async": true,
         "crossDomain": true,
@@ -126,20 +154,12 @@ function getDotaPlayers(player){
     });
 }
 
-var fortniteTopPlayers= [
-    {name: 'Ninja', gtag: 'Ninja'},
-    {name: 'NickMercs', gtag: 'NICKMERCS'},
-    {name: 'TwitchProspering,  gtag: TwitchProspering' },
-    {name: 'twitch_bogdanakh', gtag: 'twitch_bogdanakh'},
-    {name: 'TSM_Myth', gtag: 'TSM_Myth'},
-    {name: 'CourageJD', gtag: 'CourageJD'},
 
-]
-console.log (fortniteTopPlayers);
 
 var fortnitePlayersData = [];
 
 function detFortnitePlayerData(playerName) {
+   var fortniteStatsObject = {};
     var settings = {
         "async": true,
         "crossDomain": true,
@@ -156,12 +176,14 @@ function detFortnitePlayerData(playerName) {
     }
 
     $.ajax(settings).done(function (response) {
-        console.log(response);
-        apiCallDataForTwitchProspering = response;
+        fortnitePlayersData = response;
+        console.log(fortnitePlayersData);
+        for (var index = 6; index < fortnitePlayersData.lifeTimeStats.length; index++){
+            fortniteStatsObject[fortnitePlayersData.lifeTimeStats[index].key]=fortnitePlayersData.lifeTimeStats[index].value;
+        }
+
     });
 }
-
-
 
 
 
