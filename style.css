@@ -6,12 +6,16 @@ font-family: 'Fjalla One', sans-serif; */
 body {
     font-size: 0;
     margin: 0;
-    background-color: #6441A4;
+    /* background-color: #6441A4; */
+    background-image: linear-gradient(to top right, rgb(0, 0, 0), #6441A4);
 }
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-flow: wrap-reverse;
+    
+    
     height: 100vh;
     width: 100vw;
 }
@@ -30,14 +34,22 @@ body {
     border: black solid 3px;
     background-image: url("https://static-cdn.jtvnw.net/previews-ttv/live_user_ninja-640x360.jpg");
 } */
+#livePlayers2 {
+    display: flex;
+    height: 20%;
+    width: 100%;
+    padding-bottom: 3px;
+    
+}
 #livePlayers {
     display: flex;
     justify-content: space-around;
-    width: 60%;
-    height: 35%;
+    width: 80%;
+    height: 50%;
+    
 }
 .playerCard {
-    display: inline-flex;
+    display: flex;
     cursor: pointer;
     height: 100%;
     width: 45%;
@@ -56,6 +68,7 @@ body {
 .nameCard{
     height: 30%;
     width: 100%;
+
     top: 99%;
     position: relative;
     text-align: center;
@@ -63,12 +76,14 @@ body {
     background-color: black;
     opacity: 0.6;
     transition: all .4s ease-out;
+
 }
 
-.name, .game{
+/* .name, .game{
     font-size: 1.5vw;
     padding: 1.5%;
-}
+    font-family: 'Anton', sans-serif;
+} */
 
 .displayNone{
     display: none;
@@ -77,15 +92,18 @@ body {
 
 iframe {
     opacity: 0;
-    display: flex;
-
+    /* display: flex; */
+    
     justify-content: space-around;
+    
+    
     
     box-sizing: border-box;
     width: 60vw;
     height: 35vw;
     animation: fadeIn;
-    animation-duration: 3s;
+    animation-duration: 1s;
+    animation-delay: 3s;
     
     animation-fill-mode: forwards;
 }
@@ -112,7 +130,7 @@ iframe {
     height: 23%;
     animation-name: fadeIn ;
     animation-duration: 2s;
-    animation-delay: 3s;
+    animation-delay: 2s;
     animation-fill-mode: forwards;
     
 }
@@ -128,7 +146,7 @@ iframe {
     font-family: 'Anton', sans-serif;
     background-color: rgba(0, 0, 0, 0.404);
     border-radius: 3%;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.589);
+    
 }
 
 .statValue {
@@ -136,20 +154,47 @@ iframe {
     text-align: center;
     display: flex;
     align-items: center;
-    font-size: 2.5vw;
+    font-size: 2vw;
     color: rgb(184, 247, 255);
     
     width: 34%;
     font-family: 'Oswald', sans-serif;
     background-color: rgba(53, 76, 83, 0.438);
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.589);
+   
     
+}
+
+.nameCard {
+    display: flex;
+    font-size: 1.5vw;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    
+
+}
+
+.name {
+    display: flex;
+    
+
+    
+    font-family: 'Oswald', sans-serif;
+
+}
+
+.game {
+    display: flex;
+    
+    font-family: 'Oswald', sans-serif;
 }
 
 @keyframes fadeIn {
     from {opacity: 0;}
     to {opacity:100;}
 }
+
 
 #footerContainer {
     position: absolute;
@@ -185,3 +230,4 @@ img {
     height: 30%;
     width: 30%; 
 }
+

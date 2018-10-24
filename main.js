@@ -9,6 +9,7 @@ var arrayCommaString = arrayOfPlayers.join();
 var twitchStreamer = "ninja";
 var onlinePlayerArray = [];
 
+
 var dotaPlayers = {
     masondota2: "315657960",
     dendi: "70388657",
@@ -213,6 +214,7 @@ function renderLivePlayersOnDom() {
     for (let i=0; i<onlinePlayerArray.length;i++){
         
         let playerCard = $("<div>", {
+
             addClass: "playerCard",
             css: ({"background-image": "url("+onlinePlayerArray[i].thumbnail+")"}),
             on: {
@@ -224,6 +226,7 @@ function renderLivePlayersOnDom() {
                 }
             },
             appendTo: $("#livePlayers"),
+
         })
 
         let nameCard = $("<div>",{
@@ -246,7 +249,9 @@ function renderLivePlayersOnDom() {
 }
 
 function displayVideo(twitchName) {
-    $('.container').empty();
+    $('iframe').remove();
+    $('#stats').remove();
+    $('#livePlayers').attr("id","livePlayers2");
     console.log(twitchName);
     var createIframe = $('<iframe>', {
         addClass: 'currentVideo',
