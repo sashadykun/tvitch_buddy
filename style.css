@@ -37,3 +37,14 @@
     
     background-size: cover;
 }
+.statKey {
+    background-color: bisque;
+    width: 50%; 
+    display: inline-block;
+}
+.statValue {
+    background-color: aqua;
+    width: 50%;
+    display: inline-block;
+
+}
