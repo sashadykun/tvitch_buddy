@@ -10,12 +10,12 @@ var twitchStreamer = "ninja";
 var onlinePlayerArray = [];
 
 var dotaPlayers = {
-  masondota2: "315657960",
-  dendi: "70388657",
-  arteezy: "104070670",
-  sexyBamboe: "20321748",
-  singsing: "97577101",
-  darskyl: "161444478"
+    masondota2: "315657960",
+    dendi: "70388657",
+    arteezy: "104070670",
+    SexyBamboe: "20321748",
+    singsing: "97577101",
+    darskyl: "161444478"
 }
 
 var bfPlayers = {
@@ -27,15 +27,15 @@ var bfPlayers = {
 };
 
 var fortniteTopPlayers = {
-    'Ninja': 'Ninja',
-    'NickMercs': 'NICKMERCS',
-    'TwitchProspering': 'TwitchProspering',
-    'twitch_bogdanakh': 'twitch_bogdanakh',
-    'TSM_Myth': 'TSM_Myth',
-    'CourageJD': 'CourageJD',
-    'Dakotaz': 'Dakotaz',
-    'Ranger': 'WBG Ranger',
-    'SypherPK': 'SypherPK'
+    Ninja: 'Ninja',
+    NICKMERCS: 'NICKMERCS',
+    TwitchProspering: 'TwitchProspering',
+    twitch_bogdanakh: 'twitch_bogdanakh',
+    TSM_Myth: 'TSM_Myth',
+    CourageJD: 'CourageJD',
+    Dakotaz: 'Dakotaz',
+    Ranger: 'WBG Ranger',
+    SypherPK: 'SypherPK'
 
 }
 
@@ -51,9 +51,10 @@ var gameData = [];
 
 
 var gameDataBf;
-var gameDataFortNite;
 var gameDataDota = {}; 
 var gameDataLeague = {};
+var fortniteStatsObject = {};
+
 
 
 function init () {
@@ -92,6 +93,7 @@ function getBfPlayerData (player) {
             var deaths = response.result.basicStats.deaths;
             var accuracyRatio = response.result.accuracyRatio;
             gameDataBf = {'Player': player, 'Wins': wins, 'Losses': losses, 'Kills': kills, 'Deaths': deaths, 'Accuracy Ratio': accuracyRatio} 
+            displayStats(gameDataBf)
         }
     }
     $.ajax(ajaxConfig)
@@ -170,13 +172,13 @@ function getDotaPlayers(player){
       }else{
         gameDataDota.Win = "win"
       }
+      displayStats(gameDataDota)
     });
 }
 
 var fortnitePlayersData = [];
 
-function detFortnitePlayerData(playerName) {
-   var fortniteStatsObject = {};
+function getFortnitePlayerData(playerName) {
     var settings = {
         "async": true,
         "crossDomain": true,
@@ -193,16 +195,20 @@ function detFortnitePlayerData(playerName) {
     }
 
     $.ajax(settings).done(function (response) {
-
-        apiCallDataForTwitchProspering = response;
+        console.log('line 196:', response)
+        // apiCallDataForTwitchProspering = response;
+        for (var index = 6; index < response.lifeTimeStats.length; index++){
+            fortniteStatsObject[response.lifeTimeStats[index].key] = response.lifeTimeStats[index].value;
+        }
+        displayStats(fortniteStatsObject)
+        return
     });
 
-        fortnitePlayersData = response;
-        console.log(fortnitePlayersData);
-        for (var index = 6; index < fortnitePlayersData.lifeTimeStats.length; index++){
-            fortniteStatsObject[fortnitePlayersData.lifeTimeStats[index].key]=fortnitePlayersData.lifeTimeStats[index].value;
-        }
-
+        // fortnitePlayersData = response;
+        // console.log(fortnitePlayersData);
+        // for (var index = 6; index < fortnitePlayersData.lifeTimeStats.length; index++){
+        //     fortniteStatsObject[fortnitePlayersData.lifeTimeStats[index].key]=fortnitePlayersData.lifeTimeStats[index].value;
+        // }
     }
 
 
@@ -217,20 +223,14 @@ function renderLivePlayersOnDom() {
             click: function() {
                 let streamName = onlinePlayerArray[i].displayName
                 displayVideo(streamName);
-                console.log(i)
                 let gameName = onlinePlayerArray[i].game;
-                console.log(gameDataFetch(gameName));
-                // displayStats(gameDataFetch(gameName));
-                //
-                //function to sort which gameDataFetch function to call. 
+                displayStats(gameDataFetch(gameName, streamName))
             }
         },
         appendTo: $("#livePlayers"),
         })
     }
 }
-//convert twitch name to gameID
-//gamer name 
 function displayVideo(twitchName) {
     $('.container').empty();
     console.log(twitchName);
@@ -246,41 +246,50 @@ function displayVideo(twitchName) {
             }),
         appendTo: $('.container')
     })
-    //             //need to grab data from obj using 
-    // displayStats(gameDataBf);
 }
 
 
 function displayStats(gameObj) {
+    console.log('displayStats: ', gameObj)
     var overallStatsDiv = $('<div>').attr('id', 'stats')
     for (var key in gameObj) {
-        var statsCont = $('<div>').addClass('statsCont');
+        var statsCont = $('<div>').addClass('statCard');
         var statKey = $('<div>').addClass('statKey').text(key);
         var statVal = $('<div>').addClass('statValue').text(gameObj[key]);
         statsCont.append(statKey, statVal);
-        overallStatsDiv.append(statsCont);
+        overallStatsDiv.append(statsCont);  
     }
     $('.container').append(overallStatsDiv)
 }
 
-function gameDataFetch (game) {
+function gameDataFetch(game, streamName) {
     //if fortnite, call that function data and grab that info
     switch (game) {
         case 'Fortnite':
-            console.log('fortnite')
-            break;
+            //grab streamname and run it through that game player aray to find the game id.
+            for (var key in fortniteTopPlayers) {
+                if (key.toUpperCase() == streamName.toUpperCase()){
+                    getFortnitePlayerData(fortniteTopPlayers[key])
+                    return fortniteStatsObject;
+                }
+            }
+            //pass that game id into the api function 
+            //grab the obj stats  
         case 'Dota 2':
-            console.log('Dota 2')
-            //code
-            break;
+            for (var key in dotaPlayers) {
+                if (key.toUpperCase() == streamName.toUpperCase()){
+                    getDotaPlayers(dotaPlayers[key])
+                    return gameDataDota;
+                }
+            }
         case 'Battlefield 1': 
-            console.log('Battlefield 1')
-            //code
-            break; 
+            for (var key in bfPlayers) {
+                if (key.toUpperCase() == streamName.toUpperCase()){
+                    getBfPlayerData(bfPlayers[key])
+                    return gameDataBf; 
+                }
+            }
     }
-    //if battlefield, call that function data
-    //if dota, call that function data 
-
 }
 
 // function getLeaguePlayers(){
