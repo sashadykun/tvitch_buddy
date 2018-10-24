@@ -23,7 +23,8 @@ var bfPlayers = {
     misterkaiser: 'Mister_Kaiser',
     mistersamonte: 'MisterSamonte',
     Gen_Odyssey: 'Gen-Odyssey',
-    th1r3een: 'l---th1r3een---I'
+    th1r3een: 'l---th1r3een---I',
+    Papaschlauch1213: 'Papaschlauch1213'
 };
 var fortniteTopPlayers = {
     Ninja: 'Ninja',
@@ -106,7 +107,7 @@ function getOnlinePlayers(){
 }
 
 function recreateOnlinePlayerArrayToHaveOnlyOurGamePlayers(){
-    var validGames = ["Battlefield I", "Dota 2", "Fortnite"];
+    var validGames = ["Battlefield 1", "Dota 2", "Fortnite"];
     for (var arrayIndex = 0; arrayIndex<onlinePlayerArray.length; arrayIndex++){
         var currentGame = onlinePlayerArray[arrayIndex].game;
         if (!validGames.includes(currentGame)) {
