@@ -203,17 +203,17 @@ function renderLivePlayersOnDom() {
     for (let i=0; i<onlinePlayerArray.length;i++){
         
         let playerCard = $("<div>", {
-        addClass: "playerCard",
-        css: ({"background-image": "url("+onlinePlayerArray[i].thumbnail+")"}),
-        on: {
-            click: function() {
-                let streamName = onlinePlayerArray[i].displayName
-                displayVideo(streamName);
-                let gameName = onlinePlayerArray[i].game;
-                gameDataFetch(gameName, streamName)
-            }
-        },
-        appendTo: $("#livePlayers"),
+            addClass: "playerCard",
+            css: ({"background-image": "url("+onlinePlayerArray[i].thumbnail+")"}),
+            on: {
+                click: function() {
+                    let streamName = onlinePlayerArray[i].displayName
+                    displayVideo(streamName);
+                    let gameName = onlinePlayerArray[i].game;
+                    gameDataFetch(gameName, streamName)
+                }
+            },
+            appendTo: $("#livePlayers"),
         })
 
         let nameCard = $("<div>",{
