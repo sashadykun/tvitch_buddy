@@ -1,9 +1,19 @@
 $(document).ready(init);
 
-var arrayOfPlayers = ["ninja", "nickmercs", "shroud", "drdisrespectlive",];
+var arrayOfPlayers = [];
 var arrayCommaString = arrayOfPlayers.join();
 var twitchStreamer = "ninja";
 var onlinePlayerArray = [];
+
+var fortniteTopPlayers= {
+    ninja:"ninja",
+    nickmercs:"nickmercs",
+    TwitchProspering:"TwitchProspering",
+    TSM_Myth:"TSM_Myth",
+    CourageJD:"CourageJD"
+}
+ 
+
 var dotaPlayers = {
   masondota2: "315657960",
   dendi: "70388657",
@@ -126,16 +136,8 @@ function getDotaPlayers(player){
     });
 }
 
-var fortniteTopPlayers= [
-    {name: 'Ninja', gtag: 'Ninja'},
-    {name: 'NickMercs', gtag: 'NICKMERCS'},
-    {name: 'TwitchProspering,  gtag: TwitchProspering' },
-    {name: 'twitch_bogdanakh', gtag: 'twitch_bogdanakh'},
-    {name: 'TSM_Myth', gtag: 'TSM_Myth'},
-    {name: 'CourageJD', gtag: 'CourageJD'},
 
-]
-console.log (fortniteTopPlayers);
+
 
 var fortnitePlayersData = [];
 
