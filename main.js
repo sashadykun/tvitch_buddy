@@ -27,16 +27,16 @@ var bfPlayers = {
 };
 
 var fortniteTopPlayers = {
-    'Ninja': 'Ninja',
-    'NickMercs': 'NICKMERCS',
-    'TwitchProspering': 'TwitchProspering',
-    'twitch_bogdanakh': 'twitch_bogdanakh',
-    'TSM_Myth': 'TSM_Myth',
-    'CourageJD': 'CourageJD',
-    'Dakotaz': 'Dakotaz',
-    'Ranger': 'WBG Ranger',
-    'SypherPK': 'SypherPK'
-
+    Ninja: 'Ninja',
+    NickMercs: 'NICKMERCS',
+    TwitchProspering: 'TwitchProspering',
+    twitch_bogdanakh: 'twitch_bogdanakh',
+    TSM_Myth: 'TSM_Myth',
+    CourageJD: 'CourageJD',
+    Dakotaz: 'Dakotaz',
+    Ranger: 'WBG Ranger',
+    SypherPK: 'SypherPK',
+    Gen_Odyssey: 'Gen-Odyssey'
 }
 
 
@@ -48,8 +48,6 @@ var fortniteTopPlayers = {
 
 
 var gameData = [];
-
-
 var gameDataBf;
 var gameDataFortNite;
 var gameDataDota = {}; 
@@ -69,8 +67,6 @@ function createAllPlayersArray(firstArray, secondArray, thirdArray){
         arrayOfPlayers.push(...Object.keys(newArray[arrayIndex]));
 
     }
-    
-
 }
 
 function getBfPlayerData (player) {
@@ -207,7 +203,6 @@ function detFortnitePlayerData(playerName) {
 
 
 function renderLivePlayersOnDom() {
-    
     for (let i=0; i<onlinePlayerArray.length;i++){
         
         let playerCard = $("<div>", {
@@ -227,8 +222,26 @@ function renderLivePlayersOnDom() {
         },
         appendTo: $("#livePlayers"),
         })
+
+        let nameCard = $("<div>",{
+            addClass: "nameCard",
+            appendTo: playerCard
+        })
+
+        let displayName = $("<div>",{
+            addClass: "name",
+            text:onlinePlayerArray[i].displayName,
+            appendTo: nameCard
+        })
+
+        let displayGame = $("<div>",{
+            addClass: "game",
+            text:onlinePlayerArray[i].game,
+            appendTo: nameCard
+        })
     }
 }
+
 //convert twitch name to gameID
 //gamer name 
 function displayVideo(twitchName) {
