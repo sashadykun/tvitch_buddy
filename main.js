@@ -1,15 +1,11 @@
 $(document).ready(init);
 
-
-// var arrayOfPlayers = ["HafiDHimMi", "nickmercs", "arteezy", "sexyBamboe"];
-
+/*************************************************************************/
+//Global Variables go down here:
 var arrayOfPlayers = [];
-
 var arrayCommaString = arrayOfPlayers.join();
 var twitchStreamer = "ninja";
 var onlinePlayerArray = [];
-
-
 var dotaPlayers = {
     Masondota2: "315657960",
     Dendi: "70388657",
@@ -20,7 +16,6 @@ var dotaPlayers = {
     Gorgc: "56939869",
     Canceldota: "141690233"
 }
-
 var bfPlayers = {
     twistydoesntmiss: 'TwistyDoesntMlSS',
     dazs: 'Ascend_Dazs',
@@ -30,7 +25,6 @@ var bfPlayers = {
     Gen_Odyssey: 'Gen-Odyssey',
     th1r3een: 'l---th1r3een---I'
 };
-
 var fortniteTopPlayers = {
     Ninja: 'Ninja',
     NICKMERCS: 'NICKMERCS',
@@ -42,24 +36,23 @@ var fortniteTopPlayers = {
     Ranger: 'WBG Ranger',
     SypherPK: 'SypherPK',
 }
-
 var gameDataBf;
 var gameDataDota = {}; 
 var gameDataLeague = {};
 var fortniteStatsObject = {};
 
+/*************************************************************************/
+//All functions go down here:
+
 function init () {
    createAllPlayersArray(dotaPlayers, bfPlayers, fortniteTopPlayers);
    getOnlinePlayers();
-//    getLeaguePlayers()  
 }
 
 function createAllPlayersArray(firstArray, secondArray, thirdArray){
     var newArray = [firstArray,secondArray,thirdArray]
-    console.log(thirdArray);
     for (var arrayIndex = 0; arrayIndex < newArray.length; arrayIndex++){
         arrayOfPlayers.push(...Object.keys(newArray[arrayIndex]));
-
     }
 }
 
@@ -81,14 +74,19 @@ function getBfPlayerData (player) {
             var kills = response.result.basicStats.kills;
             var deaths = response.result.basicStats.deaths;
             var accuracyRatio = response.result.accuracyRatio;
-            gameDataBf = {'Player': player, 'Wins': wins, 'Losses': losses, 'Kills': kills, 'Deaths': deaths, 'Accuracy': parseFloat(accuracyRatio*100).toFixed(1)+"%"} 
+            gameDataBf = {
+                'Player': player, 
+                'Wins': wins, 
+                'Losses': losses, 
+                'Kills': kills, 
+                'Deaths': deaths, 
+                'Accuracy': parseFloat(accuracyRatio*100).toFixed(1)+"%"
+            } 
             displayStats(gameDataBf)
-            console.log(gameDataBf);
         }
     }
     $.ajax(ajaxConfig)
 }
-
 
 function getOnlinePlayers(){
     var arrayCommaString = arrayOfPlayers.join();
@@ -100,17 +98,15 @@ function getOnlinePlayers(){
         "headers": {
           "Client-ID": "2jfkzp4pqy42ge7y17na6l0kf8fdtx",
         }
-      }
-      $.ajax(settings).done(function (response) {
+    }
+    $.ajax(settings).done(function (response) {
         makeOnlinePlayerObj(response);
         renderLivePlayersOnDom();
-      });
-      
+    });
 }
-function recreateOnlinePlayerArrayToHaveOnlyOurGamePlayers(){
-    
-    var validGames = ["Battlefield I", "Dota 2", "Fortnite"];
 
+function recreateOnlinePlayerArrayToHaveOnlyOurGamePlayers(){
+    var validGames = ["Battlefield I", "Dota 2", "Fortnite"];
     for (var arrayIndex = 0; arrayIndex<onlinePlayerArray.length; arrayIndex++){
         var currentGame = onlinePlayerArray[arrayIndex].game;
         if (!validGames.includes(currentGame)) {
@@ -118,6 +114,7 @@ function recreateOnlinePlayerArrayToHaveOnlyOurGamePlayers(){
         }
     }
 }
+
 function makeOnlinePlayerObj(response){
     for (var i=0; i<response.streams.length; i++) {
         var tempPlayerObj = {};
@@ -126,12 +123,12 @@ function makeOnlinePlayerObj(response){
         var displayName = response.streams[i].channel.display_name;
         var status = response.streams[i].channel.status;
         var viewers = response.streams[i].viewers;
-
         tempPlayerObj.game = streamingGame; 
         tempPlayerObj.thumbnail = thumbnail;
         tempPlayerObj.displayName = displayName;
         onlinePlayerArray.push(tempPlayerObj);
-    }}
+    }
+}
     
 function getDotaPlayers(player, name){
     gameDataDota.Player = name;
@@ -139,57 +136,61 @@ function getDotaPlayers(player, name){
       "url": "https://api.opendota.com/api/players/"+player,
       "method": "GET"
     }
-
     var winLoss = {
        "url": "https://api.opendota.com/api/players/"+player+"/wl",
        "method": "GET"
     }
-
     var previousGame = {
       "url": "https://api.opendota.com/api/players/"+player+"/matches",
       "method": "GET"
     }
-    
     $.ajax(soloRank).done(function (response) {
         if(response.mmr_estimate.estimate >= 5440){
             gameDataDota.Rank = "Divine 5"
-        }else if(response.mmr_estimate.estimate >= 5280){
+        }
+        else if(response.mmr_estimate.estimate >= 5280){
             gameDataDota.Rank = "Divine 4"
-        }else if(response.mmr_estimate.estimate >= 5120){
+        }
+        else if(response.mmr_estimate.estimate >= 5120){
             gameDataDota.Rank = "Divine 3"
-        }else if(response.mmr_estimate.estimate >= 4960){
+        }
+        else if(response.mmr_estimate.estimate >= 4960){
             gameDataDota.Rank = "Divine 2"
-        }else if(response.mmr_estimate.estimate >= 4800){
+        }
+        else if(response.mmr_estimate.estimate >= 4800){
             gameDataDota.Rank = "Divine 1"
-        }else if(response.mmr_estimate.estimate >= 4640){
+        }
+        else if(response.mmr_estimate.estimate >= 4640){
             gameDataDota.Rank = "Ancient 5"
-        }else if(response.mmr_estimate.estimate >= 4480){
+        }
+        else if(response.mmr_estimate.estimate >= 4480){
             gameDataDota.Rank = "Ancient 4"
-        }else if(response.mmr_estimate.estimate >= 4320){
+        }
+        else if(response.mmr_estimate.estimate >= 4320){
             gameDataDota.Rank = "Ancient 3"
-        }else if(response.mmr_estimate.estimate >= 4160){
+        }
+        else if(response.mmr_estimate.estimate >= 4160){
             gameDataDota.Rank = "Ancient 2"
-        }else if(response.mmr_estimate.estimate >= 4000){
+        }
+        else if(response.mmr_estimate.estimate >= 4000){
             gameDataDota.Rank = "Ancient 1"
         }
     });
-
     $.ajax(winLoss).done(function (response2) {
-
         gameDataDota.Wins = response2.win;
         gameDataDota.Loses = response2.lose;
     });
-
     $.ajax(previousGame).done(function (response3) {
         gameDataDota.Kills = response3[0].kills;
         gameDataDota.Deaths = response3[0].deaths;
         gameDataDota.Assists = response3[0].assists;
-      if(response3[0].radiant_win === false){
-        gameDataDota.Game = "Lost"
-      }else{
-        gameDataDota.Game = "Won"
-      }
-      displayStats(gameDataDota)
+        if(response3[0].radiant_win === false){
+            gameDataDota.Game = "Lost"
+        }
+        else{
+            gameDataDota.Game = "Won"
+        }
+        displayStats(gameDataDota)
     });
 }
 
@@ -208,9 +209,7 @@ function getFortnitePlayerData(playerName) {
             "TRN-Api-Key": "516f26d7-878d-41f9-b03e-df2ad5a11530",
         }
     }
-
     $.ajax(settings).done(function (response) {
-        // apiCallDataForTwitchProspering = response;
         for (var index = 6; index < response.lifeTimeStats.length; index++){
             fortniteStatsObject[response.lifeTimeStats[index].key] = response.lifeTimeStats[index].value;
         }
@@ -219,17 +218,11 @@ function getFortnitePlayerData(playerName) {
     });
 }
 
-
 function renderLivePlayersOnDom() {
     recreateOnlinePlayerArrayToHaveOnlyOurGamePlayers();
     onlinePlayerArray.sort(function (a, b) {return 0.5 - Math.random()});
-
-
     for (let i=0; i<onlinePlayerArray.length;i++){
-
-        console.log('online now',onlinePlayerArray[i].game)
         let playerCard = $("<div>", {
-
             addClass: "playerCard",
             css: ({"background-image": "url("+onlinePlayerArray[i].thumbnail+")"}),
             on: {
@@ -237,26 +230,20 @@ function renderLivePlayersOnDom() {
                     let streamName = onlinePlayerArray[i].displayName
                     displayVideo(streamName);
                     let gameName = onlinePlayerArray[i].game;
-
                     gameDataFetch(gameName, streamName)
                 }
             },
-
             appendTo: $("#livePlayers"),
-
         })
-
         let nameCard = $("<div>",{
             addClass: "nameCard",
             appendTo: playerCard
         })
-
         let displayName = $("<div>",{
             addClass: "name",
             text:onlinePlayerArray[i].displayName,
             appendTo: nameCard
         })
-
         let displayGame = $("<div>",{
             addClass: "game",
             text:onlinePlayerArray[i].game,
@@ -272,7 +259,6 @@ function displayVideo(twitchName) {
     $('#headerContainer').remove();
     $('#livePlayers').attr("id","livePlayers2");
     $('.playerCard').removeClass('playerCard').addClass('playerCard2')
-    console.log(twitchName);
     var createIframe = $('<iframe>', {
         addClass: 'currentVideo',
         attr: ({
@@ -287,9 +273,7 @@ function displayVideo(twitchName) {
     })
 }
 
-
 function displayStats(gameObj) {
-    // console.log('displayStats: ', gameObj)
     var overallStatsDiv = $('<div>').attr('id', 'stats')
     for (var key in gameObj) {
         var statsCont = $('<div>').addClass('statCard');
@@ -302,18 +286,14 @@ function displayStats(gameObj) {
 }
 
 function gameDataFetch(game, streamName) {
-    //if fortnite, call that function data and grab that info
     switch (game) {
         case 'Fortnite':
-            //grab streamname and run it through that game player aray to find the game id.
             for (var key in fortniteTopPlayers) {
                 if (key.toUpperCase() == streamName.toUpperCase()){
                     getFortnitePlayerData(fortniteTopPlayers[key])
                     return fortniteStatsObject;
                 }
             }
-            //pass that game id into the api function 
-            //grab the obj stats  
         case 'Dota 2':
             for (var key in dotaPlayers) {
                 if (key.toUpperCase() == streamName.toUpperCase()){

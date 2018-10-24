@@ -1,60 +1,37 @@
-/* font-family: 'Oswald', sans-serif;
-font-family: 'PT Sans Narrow', sans-serif;
-font-family: 'Anton', sans-serif;
-font-family: 'Fjalla One', sans-serif; */
-
 body {
     font-size: 0;
     margin: 0;
-    /* background-color: #6441A4; */
     background-image: linear-gradient(to top right, rgb(0, 0, 0), #6441A4);
 }
+
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-flow: wrap-reverse;
-    
-    
     height: 100vh;
     width: 100vw;
 }
-/* #twitchPlayer {
-    display: inline-flex;
-    
-    
-    width: 55vw;
-    
-} */
-/* #winStat {
-    display: inline-flex;
-    
-    width: 10vw;
-    height: 5vh;
-    border: black solid 3px;
-    background-image: url("https://static-cdn.jtvnw.net/previews-ttv/live_user_ninja-640x360.jpg");
-} */
+
 #livePlayers2 {
     display: flex;
     height: 25%;
     width: 100%;
-    
-    
 }
+
 #livePlayers {
     display: flex;
     justify-content: space-around;
     width: 80%;
     height: 50%;
-    
 }
+
 .playerCard {
     display: flex;
     cursor: pointer;
     height: 100%;
     width: 25%;
     background-size: cover;
-    
     overflow: hidden;
 }
 
@@ -67,9 +44,7 @@ body {
     background-repeat: no-repeat;
     background-position: bottom;
     overflow: hidden;
-    
 }
-
 
 .playerCard:hover{
     opacity: 0.80;
@@ -86,46 +61,31 @@ body {
 .playerCard2:hover > .nameCard{
     top: 65%;
 }
+
 .nameCard{
     height: 35%;
     width: 100%;
-
     top: 100%;
     position: relative;
     text-align: center;
     color:white;
     background-color: rgba(0, 0, 0, 0.555);
-    
     transition: all .4s ease-out;
-
 }
-
-/* .name, .game{
-    font-size: 1.5vw;
-    padding: 1.5%;
-    font-family: 'Anton', sans-serif;
-} */
 
 .displayNone{
     display: none;
 }
 
-
 iframe {
     opacity: 0;
-    /* display: flex; */
-    
     justify-content: space-around;
-    
-    
-    
     box-sizing: border-box;
     width: 60vw;
     height: 35vw;
     animation: fadeIn;
     animation-duration: 1s;
     animation-delay: 3s;
-    
     animation-fill-mode: forwards;
 }
 
@@ -133,28 +93,24 @@ iframe {
     display: flex;
     box-sizing: border-box;
     justify-content: space-around;
-    
     width: 40vw;
     height: 35vw;
     flex-flow: wrap;
 }
 
 .statCard {
-    
     opacity: 0;
     display: flex;
     box-sizing: border-box;
-    
     justify-content: space-around;
-    
     width: 48%;
     height: 23%;
     animation-name: fadeIn ;
     animation-duration: 2s;
     animation-delay: 2s;
     animation-fill-mode: forwards;
-    
 }
+
 .statKey {
     display: flex;
     text-align: center;
@@ -167,7 +123,6 @@ iframe {
     font-family: 'Anton', sans-serif;
     background-color: rgba(0, 0, 0, 0.404);
     border-radius: 3%;
-    
 }
 
 .statValue {
@@ -180,8 +135,6 @@ iframe {
     width: 53%;
     font-family: 'Oswald', sans-serif;
     background-color: rgba(53, 76, 83, 0.438);
-   
-    
 }
 
 .nameCard {
@@ -191,22 +144,15 @@ iframe {
     align-items: center;
     justify-content: center;
     color: white;
-    
-
 }
 
 .name {
     display: flex;
-    
-
-    
     font-family: 'Oswald', sans-serif;
-
 }
 
 .game {
     display: flex;
-    
     font-family: 'Oswald', sans-serif;
 }
 
@@ -215,72 +161,78 @@ iframe {
     to {opacity:100;}
 }
 
-
 #footerContainer {
     position: absolute;
     top: 73%;
     width: 100%; 
     height: 27%;
-    /* background-color: aqua; */
 }
+
 .footer {
     position: relative;
     height: 100%;
     width: 100%; 
-    /* background-color: blue; */
 }
+
 .footBorder {
     position: relative;
     text-align: center;
     height: 70%;
     width: 25%;
     top: 15%;
-    /* background-color: black; */
     display: inline-block;
 }
+
 .pic1 {
     position: relative;
     left: 35%; 
 }
+
 .pic2 {
     position: relative;
     left: 12.5%; 
 }
+
 .pic3 {
     position: relative;
     right: 12.5%; 
 }
+
 .pic4 {
     position: relative;
     right: 35%; 
 }
+
 img {
     height: 30%;
     width: 35%; 
 }
+
 @font-face {
     font-family: twitch;
     src: url(font/aurora.ttf);
  }
+
 #headerContainer {
     position: absolute;
     top: 0; 
     width: 100%;
     height: 20%; 
 }
+
 .header{
     position: relative;
     width:100%; 
     height:100%; 
-    /* background-color: aliceblue; */
 }
+
 .textBorder{
     position: relative;
     left: 15%;
     width: 70%; 
     height: 100%;
-    /* background-color: black; */
 }
+
 .text{
     position: relative;
     top: 40%;
