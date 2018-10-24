@@ -43,18 +43,10 @@ var fortniteTopPlayers = {
     SypherPK: 'SypherPK',
 }
 
-
-// var leaguePlayser = {
-//     froggen: '71899217'
-// }
-
-//var gameData = [];
 var gameDataBf;
 var gameDataDota = {}; 
 var gameDataLeague = {};
 var fortniteStatsObject = {};
-
-
 
 function init () {
    createAllPlayersArray(dotaPlayers, bfPlayers, fortniteTopPlayers);
@@ -110,12 +102,22 @@ function getOnlinePlayers(){
         }
       }
       $.ajax(settings).done(function (response) {
-        makeOnlinePlayerObj(response)
+        makeOnlinePlayerObj(response);
         renderLivePlayersOnDom();
       });
       
 }
+function recreateOnlinePlayerArrayToHaveOnlyOurGamePlayers(){
+    
+    var validGames = ["Battlefield I", "Dota 2", "Fortnite"];
 
+    for (var arrayIndex = 0; arrayIndex<onlinePlayerArray.length; arrayIndex++){
+        var currentGame = onlinePlayerArray[arrayIndex].game;
+        if (!validGames.includes(currentGame)) {
+            onlinePlayerArray.splice(arrayIndex,1);
+        }
+    }
+}
 function makeOnlinePlayerObj(response){
     for (var i=0; i<response.streams.length; i++) {
         var tempPlayerObj = {};
@@ -208,7 +210,6 @@ function getFortnitePlayerData(playerName) {
     }
 
     $.ajax(settings).done(function (response) {
-        console.log('line 196:', response)
         // apiCallDataForTwitchProspering = response;
         for (var index = 6; index < response.lifeTimeStats.length; index++){
             fortniteStatsObject[response.lifeTimeStats[index].key] = response.lifeTimeStats[index].value;
@@ -216,21 +217,17 @@ function getFortnitePlayerData(playerName) {
         displayStats(fortniteStatsObject)
         return
     });
-
-        // fortnitePlayersData = response;
-        // console.log(fortnitePlayersData);
-        // for (var index = 6; index < fortnitePlayersData.lifeTimeStats.length; index++){
-        //     fortniteStatsObject[fortnitePlayersData.lifeTimeStats[index].key]=fortnitePlayersData.lifeTimeStats[index].value;
-        // }
-    }
+}
 
 
 function renderLivePlayersOnDom() {
-
+    recreateOnlinePlayerArrayToHaveOnlyOurGamePlayers();
     onlinePlayerArray.sort(function (a, b) {return 0.5 - Math.random()});
 
+
     for (let i=0; i<onlinePlayerArray.length;i++){
-        
+
+        console.log('online now',onlinePlayerArray[i].game)
         let playerCard = $("<div>", {
 
             addClass: "playerCard",
@@ -240,9 +237,11 @@ function renderLivePlayersOnDom() {
                     let streamName = onlinePlayerArray[i].displayName
                     displayVideo(streamName);
                     let gameName = onlinePlayerArray[i].game;
+
                     gameDataFetch(gameName, streamName)
                 }
             },
+
             appendTo: $("#livePlayers"),
 
         })
@@ -332,15 +331,5 @@ function gameDataFetch(game, streamName) {
     }
 }
 
-// function getLeaguePlayers(){
-//     var accountInfo = {
-//         "url": "https://na1.api.riotgames.com/lol/summoner/v3/summoners/71899217?api_key=RGAPI-25569727-3b8d-4531-ad45-b80cd4d1a8f3",
-//         "method": "GET",
-//         dataType: "json"
-//         }
-      
-//       $.ajax(accountInfo).done(function (response) {
-//         console.log(response);
-//       });
-// }
+
 
