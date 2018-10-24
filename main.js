@@ -1,5 +1,8 @@
 $(document).ready(init);
 
+
+// var arrayOfPlayers = ["HafiDHimMi", "nickmercs", "arteezy", "sexyBamboe"];
+
 var arrayOfPlayers = [];
 
 var arrayCommaString = arrayOfPlayers.join();
@@ -69,12 +72,6 @@ function createAllPlayersArray(firstArray, secondArray, thirdArray){
 
 }
 
-
-   getBfPlayerData('TwistyDoesntMlSS')
-   getDotaPlayers("315657960");
-}
-
-
 function getBfPlayerData (player) {
     var ajaxConfig = {
         url: "https://danielpaschal.com/lfzproxies/battlefieldproxy.php",
@@ -129,13 +126,14 @@ function makeOnlinePlayerObj(response){
         var status = response.streams[i].channel.status;
         var viewers = response.streams[i].viewers;
 
-        tempPlayerObj.game = streamingGame;
+        tempPlayerObj.game = streamingGame; 
         tempPlayerObj.thumbnail = thumbnail;
         tempPlayerObj.displayName = displayName;
         onlinePlayerArray.push(tempPlayerObj);
 
 
         console.log(response);
+        console.log('GAME: ', onlinePlayerArray);
     }}
     
 function getDotaPlayers(player){
@@ -207,16 +205,79 @@ function detFortnitePlayerData(playerName) {
     });
 }
 
-
-
 function renderLivePlayersOnDom() {
     
-    for (var i=0; i<onlinePlayerArray.length;i++){
+    for (let i=0; i<onlinePlayerArray.length;i++){
         
-        var playerCard = $("<div>").addClass("playerCard").css({
-            "background-image": "url("+onlinePlayerArray[i].thumbnail+")",
+        let playerCard = $("<div>", {
+        addClass: "playerCard",
+        css: ({"background-image": "url("+onlinePlayerArray[i].thumbnail+")"}),
+        on: {
+            click: function() {
+                let streamName = onlinePlayerArray[i].displayName
+                displayVideo(streamName);
+                console.log(i)
+                let gameName = onlinePlayerArray[i].game;
+                console.log(gameDataFetch(gameName));
+                // displayStats(gameDataFetch(gameName));
+                //
+                //function to sort which gameDataFetch function to call. 
+            }
+        },
+        appendTo: $("#livePlayers"),
         })
-        $("#livePlayers").append(playerCard);
     }
 }
+//convert twitch name to gameID
+//gamer name 
+function displayVideo(twitchName) {
+    $('.container').empty();
+    console.log(twitchName);
+    var createIframe = $('<iframe>', {
+        addClass: 'currentVideo',
+        attr: ({
+            'src': `https://player.twitch.tv/?channel=${twitchName}&muted=true`, 
+            'height': "720",
+            'width': "1280",
+            'frameborder': "0",
+            'scrolling': "no",
+            'allowfullscreen': "true"
+            }),
+        appendTo: $('.container')
+    })
+    //             //need to grab data from obj using 
+    // displayStats(gameDataBf);
+}
 
+
+function displayStats(gameObj) {
+    var overallStatsDiv = $('<div>').attr('id', 'stats')
+    for (var key in gameObj) {
+        var statsCont = $('<div>').addClass('statsCont');
+        var statKey = $('<div>').addClass('statKey').text(key);
+        var statVal = $('<div>').addClass('statValue').text(gameObj[key]);
+        statsCont.append(statKey, statVal);
+        overallStatsDiv.append(statsCont);
+    }
+    $('.container').append(overallStatsDiv)
+}
+
+function gameDataFetch (game) {
+    //if fortnite, call that function data and grab that info
+    switch (game) {
+        case 'Fortnite':
+            console.log('fortnite')
+            break;
+        case 'Dota 2':
+            console.log('Dota 2')
+            //code
+            break;
+        case 'Battlefield 1': 
+            console.log('Battlefield 1')
+            //code
+            break; 
+    }
+    //if battlefield, call that function data
+    //if dota, call that function data 
+
+}
