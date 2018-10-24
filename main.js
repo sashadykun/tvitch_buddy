@@ -23,7 +23,8 @@ var bfPlayers = {
     dazs: 'Ascend_Dazs',
     Boccarossa13: 'Boccarossa',
     misterkaiser: 'Mister_Kaiser',
-    mistersamonte: 'MisterSamonte'
+    mistersamonte: 'MisterSamonte',
+    Gen_Odyssey: 'Gen-Odyssey'
 };
 
 var fortniteTopPlayers = {
@@ -36,7 +37,6 @@ var fortniteTopPlayers = {
     Dakotaz: 'Dakotaz',
     Ranger: 'WBG Ranger',
     SypherPK: 'SypherPK',
-    Gen_Odyssey: 'Gen-Odyssey'
 }
 
 
