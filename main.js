@@ -210,7 +210,7 @@ function renderLivePlayersOnDom() {
                 let streamName = onlinePlayerArray[i].displayName
                 displayVideo(streamName);
                 let gameName = onlinePlayerArray[i].game;
-                displayStats(gameDataFetch(gameName, streamName))
+                gameDataFetch(gameName, streamName)
             }
         },
         appendTo: $("#livePlayers"),
@@ -254,7 +254,7 @@ function displayVideo(twitchName) {
 
 
 function displayStats(gameObj) {
-    console.log('displayStats: ', gameObj)
+    // console.log('displayStats: ', gameObj)
     var overallStatsDiv = $('<div>').attr('id', 'stats')
     for (var key in gameObj) {
         var statsCont = $('<div>').addClass('statCard');
