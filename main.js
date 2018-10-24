@@ -22,7 +22,8 @@ var dotaPlayers = {
   dendi: "70388657",
   arteezy: "104070670",
   sexyBamboe: "20321748",
-  singsing: "97577101"
+  singsing: "97577101",
+  darskyl: "161444478"
 }
 
 var bfPlayers = {
@@ -45,22 +46,27 @@ var fortniteTopPlayers = {
 
 }
 
-detFortnitePlayerData('NickMercs');
+
+// var leaguePlayser = {
+//     froggen: '71899217'
+// }
+
+//detFortnitePlayerData('NickMercs');
 
 
 var gameData = [];
 
+
 var gameDataBf;
 var gameDataFortNite;
 var gameDataDota = {}; 
+var gameDataLeague = {};
 
 
 function init () {
    createAllPlayersArray(dotaPlayers, bfPlayers, fortniteTopPlayers);
    getOnlinePlayers();
-
-   console.log('online: ', onlinePlayerArray);
-   
+//    getLeaguePlayers()  
 }
 
 function createAllPlayersArray(firstArray, secondArray, thirdArray){
@@ -91,7 +97,6 @@ function getBfPlayerData (player) {
             var deaths = response.result.basicStats.deaths;
             var accuracyRatio = response.result.accuracyRatio;
             gameDataBf = {'Player': player, 'Wins': wins, 'Losses': losses, 'Kills': kills, 'Deaths': deaths, 'Accuracy Ratio': accuracyRatio} 
-            console.log(gameDataBf)
         }
     }
     $.ajax(ajaxConfig)
@@ -112,7 +117,6 @@ function getOnlinePlayers(){
       $.ajax(settings).done(function (response) {
         makeOnlinePlayerObj(response)
         renderLivePlayersOnDom();
-        console.log(onlinePlayerArray);
       });
       
 }
@@ -131,9 +135,9 @@ function makeOnlinePlayerObj(response){
         tempPlayerObj.displayName = displayName;
         onlinePlayerArray.push(tempPlayerObj);
 
+        //console.log(response);
+        //console.log('GAME: ', onlinePlayerArray);
 
-        console.log(response);
-        console.log('GAME: ', onlinePlayerArray);
     }}
     
 function getDotaPlayers(player){
@@ -171,9 +175,20 @@ function getDotaPlayers(player){
       }else{
         gameDataDota.Win = "win"
       }
-      console.log('DATA',gameDataDota)
     });
 }
+
+
+var fortniteTopPlayers= [
+    {name: 'Ninja', gtag: 'Ninja'},
+    {name: 'NickMercs', gtag: 'NICKMERCS'},
+    {name: 'TwitchProspering,  gtag: TwitchProspering' },
+    {name: 'twitch_bogdanakh', gtag: 'twitch_bogdanakh'},
+    {name: 'TSM_Myth', gtag: 'TSM_Myth'},
+    {name: 'CourageJD', gtag: 'CourageJD'},
+
+]
+
 
 
 var fortnitePlayersData = [];
@@ -196,6 +211,11 @@ function detFortnitePlayerData(playerName) {
     }
 
     $.ajax(settings).done(function (response) {
+
+        apiCallDataForTwitchProspering = response;
+    });
+}
+
         fortnitePlayersData = response;
         console.log(fortnitePlayersData);
         for (var index = 6; index < fortnitePlayersData.lifeTimeStats.length; index++){
@@ -204,6 +224,7 @@ function detFortnitePlayerData(playerName) {
 
     });
 }
+
 
 function renderLivePlayersOnDom() {
     
@@ -281,3 +302,16 @@ function gameDataFetch (game) {
     //if dota, call that function data 
 
 }
+
+// function getLeaguePlayers(){
+//     var accountInfo = {
+//         "url": "https://na1.api.riotgames.com/lol/summoner/v3/summoners/71899217?api_key=RGAPI-25569727-3b8d-4531-ad45-b80cd4d1a8f3",
+//         "method": "GET",
+//         dataType: "json"
+//         }
+      
+//       $.ajax(accountInfo).done(function (response) {
+//         console.log(response);
+//       });
+// }
+
