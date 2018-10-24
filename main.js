@@ -11,18 +11,14 @@ var onlinePlayerArray = [];
 
 
 var dotaPlayers = {
-    masondota2: "315657960",
-    dendi: "70388657",
-    arteezy: "104070670",
+    Masondota2: "315657960",
+    Dendi: "70388657",
+    Arteezy: "104070670",
     SexyBamboe: "20321748",
-    singsing: "97577101",
-    darskyl: "161444478",
-    GranDGranT: '137857496',
-    Dota2ruhub2: '871228094'
-
-
-
-
+    Singsing: "97577101",
+    Darskyl: "161444478",
+    Gorgc: "56939869",
+    Canceldota: "141690233"
 }
 
 var bfPlayers = {
@@ -93,8 +89,9 @@ function getBfPlayerData (player) {
             var kills = response.result.basicStats.kills;
             var deaths = response.result.basicStats.deaths;
             var accuracyRatio = response.result.accuracyRatio;
-            gameDataBf = {'Player': player, 'Wins': wins, 'Losses': losses, 'Kills': kills, 'Deaths': deaths, 'Accuracy Ratio': accuracyRatio} 
+            gameDataBf = {'Player': player, 'Wins': wins, 'Losses': losses, 'Kills': kills, 'Deaths': deaths, 'Accuracy': parseFloat(accuracyRatio*100).toFixed(1)+"%"} 
             displayStats(gameDataBf)
+            console.log(gameDataBf);
         }
     }
     $.ajax(ajaxConfig)
@@ -134,9 +131,9 @@ function makeOnlinePlayerObj(response){
         onlinePlayerArray.push(tempPlayerObj);
     }}
     
-function getDotaPlayers(player){
-    gameDataDota.Player = player;
-   var accountInfo = {
+function getDotaPlayers(player, name){
+    gameDataDota.Player = name;
+   var soloRank = {
       "url": "https://api.opendota.com/api/players/"+player,
       "method": "GET"
     }
@@ -151,11 +148,32 @@ function getDotaPlayers(player){
       "method": "GET"
     }
     
-    $.ajax(accountInfo).done(function (response) {
-        gameDataDota.SoloRank = response.solo_competitive_rank
+    $.ajax(soloRank).done(function (response) {
+        if(response.mmr_estimate.estimate >= 5440){
+            gameDataDota.Rank = "Divine 5"
+        }else if(response.mmr_estimate.estimate >= 5280){
+            gameDataDota.Rank = "Divine 4"
+        }else if(response.mmr_estimate.estimate >= 5120){
+            gameDataDota.Rank = "Divine 3"
+        }else if(response.mmr_estimate.estimate >= 4960){
+            gameDataDota.Rank = "Divine 2"
+        }else if(response.mmr_estimate.estimate >= 4800){
+            gameDataDota.Rank = "Divine 1"
+        }else if(response.mmr_estimate.estimate >= 4640){
+            gameDataDota.Rank = "Ancient 5"
+        }else if(response.mmr_estimate.estimate >= 4480){
+            gameDataDota.Rank = "Ancient 4"
+        }else if(response.mmr_estimate.estimate >= 4320){
+            gameDataDota.Rank = "Ancient 3"
+        }else if(response.mmr_estimate.estimate >= 4160){
+            gameDataDota.Rank = "Ancient 2"
+        }else if(response.mmr_estimate.estimate >= 4000){
+            gameDataDota.Rank = "Ancient 1"
+        }
     });
 
     $.ajax(winLoss).done(function (response2) {
+
         gameDataDota.Wins = response2.win;
         gameDataDota.Loses = response2.lose;
     });
@@ -165,9 +183,9 @@ function getDotaPlayers(player){
         gameDataDota.Deaths = response3[0].deaths;
         gameDataDota.Assists = response3[0].assists;
       if(response3[0].radiant_win === false){
-        gameDataDota.Win = "lost"
+        gameDataDota.Game = "Lost"
       }else{
-        gameDataDota.Win = "win"
+        gameDataDota.Game = "Won"
       }
       displayStats(gameDataDota)
     });
@@ -299,7 +317,7 @@ function gameDataFetch(game, streamName) {
         case 'Dota 2':
             for (var key in dotaPlayers) {
                 if (key.toUpperCase() == streamName.toUpperCase()){
-                    getDotaPlayers(dotaPlayers[key])
+                    getDotaPlayers(dotaPlayers[key], key)
                     return gameDataDota;
                 }
             }
