@@ -1,9 +1,22 @@
 $(document).ready(init);
 
-var arrayOfPlayers = ["ninja", "nickmercs", "shroud", "drdisrespectlive",];
+
+// var arrayOfPlayers = ["HafiDHimMi", "nickmercs", "arteezy", "sexyBamboe"];
+
+var arrayOfPlayers = [];
+
 var arrayCommaString = arrayOfPlayers.join();
 var twitchStreamer = "ninja";
 var onlinePlayerArray = [];
+
+var fortniteTopPlayers= {
+    ninja:"ninja",
+    nickmercs:"nickmercs",
+    TwitchProspering:"TwitchProspering",
+    TSM_Myth:"TSM_Myth",
+    CourageJD:"CourageJD"
+}
+ 
 var dotaPlayers = {
   masondota2: "315657960",
   dendi: "70388657",
@@ -19,22 +32,50 @@ var bfPlayers = {
     Boccarossa13: 'Boccarossa',
     misterkaiser: 'Mister_Kaiser',
     mistersamonte: 'MisterSamonte'
+};
+var fortniteTopPlayers = {
+    'Ninja': 'Ninja',
+    'NickMercs': 'NICKMERCS',
+    'TwitchProspering': 'TwitchProspering',
+    'twitch_bogdanakh': 'twitch_bogdanakh',
+    'TSM_Myth': 'TSM_Myth',
+    'CourageJD': 'CourageJD',
+    'Dakotaz': 'Dakotaz',
+    'Ranger': 'WBG Ranger',
+    'SypherPK': 'SypherPK'
+
 }
+
 
 // var leaguePlayser = {
 //     froggen: '71899217'
 // }
+
+//detFortnitePlayerData('NickMercs');
+
+
+var gameData = [];
+
 
 var gameDataBf;
 var gameDataFortNite;
 var gameDataDota = {}; 
 var gameDataLeague = {};
 
+
 function init () {
+   createAllPlayersArray(dotaPlayers, bfPlayers, fortniteTopPlayers);
    getOnlinePlayers();
-   getBfPlayerData('TwistyDoesntMlSS')
-   getDotaPlayers("315657960");
-//    getLeaguePlayers()
+//    getLeaguePlayers()  
+}
+
+function createAllPlayersArray(firstArray, secondArray, thirdArray){
+    var newArray = [firstArray,secondArray,thirdArray]
+    for (var arrayIndex = 0; arrayIndex < newArray.length; arrayIndex++){
+        arrayOfPlayers.push(...Object.keys(newArray[arrayIndex]));
+
+    }
+
 }
 
 function getBfPlayerData (player) {
@@ -63,6 +104,7 @@ function getBfPlayerData (player) {
 
 
 function getOnlinePlayers(){
+    var arrayCommaString = arrayOfPlayers.join();
     var settings = {
         "async": true,
         "crossDomain": true,
@@ -88,10 +130,13 @@ function makeOnlinePlayerObj(response){
         var status = response.streams[i].channel.status;
         var viewers = response.streams[i].viewers;
 
-        tempPlayerObj.game = streamingGame;
+        tempPlayerObj.game = streamingGame; 
         tempPlayerObj.thumbnail = thumbnail;
         tempPlayerObj.displayName = displayName;
         onlinePlayerArray.push(tempPlayerObj);
+
+        //console.log(response);
+        //console.log('GAME: ', onlinePlayerArray);
 
     }}
     
@@ -133,6 +178,7 @@ function getDotaPlayers(player){
     });
 }
 
+
 var fortniteTopPlayers= [
     {name: 'Ninja', gtag: 'Ninja'},
     {name: 'NickMercs', gtag: 'NICKMERCS'},
@@ -144,9 +190,11 @@ var fortniteTopPlayers= [
 ]
 
 
+
 var fortnitePlayersData = [];
 
 function detFortnitePlayerData(playerName) {
+   var fortniteStatsObject = {};
     var settings = {
         "async": true,
         "crossDomain": true,
@@ -163,8 +211,96 @@ function detFortnitePlayerData(playerName) {
     }
 
     $.ajax(settings).done(function (response) {
+
         apiCallDataForTwitchProspering = response;
     });
+}
+
+        fortnitePlayersData = response;
+        console.log(fortnitePlayersData);
+        for (var index = 6; index < fortnitePlayersData.lifeTimeStats.length; index++){
+            fortniteStatsObject[fortnitePlayersData.lifeTimeStats[index].key]=fortnitePlayersData.lifeTimeStats[index].value;
+        }
+
+    });
+}
+
+
+function renderLivePlayersOnDom() {
+    
+    for (let i=0; i<onlinePlayerArray.length;i++){
+        
+        let playerCard = $("<div>", {
+        addClass: "playerCard",
+        css: ({"background-image": "url("+onlinePlayerArray[i].thumbnail+")"}),
+        on: {
+            click: function() {
+                let streamName = onlinePlayerArray[i].displayName
+                displayVideo(streamName);
+                console.log(i)
+                let gameName = onlinePlayerArray[i].game;
+                console.log(gameDataFetch(gameName));
+                // displayStats(gameDataFetch(gameName));
+                //
+                //function to sort which gameDataFetch function to call. 
+            }
+        },
+        appendTo: $("#livePlayers"),
+        })
+    }
+}
+//convert twitch name to gameID
+//gamer name 
+function displayVideo(twitchName) {
+    $('.container').empty();
+    console.log(twitchName);
+    var createIframe = $('<iframe>', {
+        addClass: 'currentVideo',
+        attr: ({
+            'src': `https://player.twitch.tv/?channel=${twitchName}&muted=true`, 
+            'height': "720",
+            'width': "1280",
+            'frameborder': "0",
+            'scrolling': "no",
+            'allowfullscreen': "true"
+            }),
+        appendTo: $('.container')
+    })
+    //             //need to grab data from obj using 
+    // displayStats(gameDataBf);
+}
+
+
+function displayStats(gameObj) {
+    var overallStatsDiv = $('<div>').attr('id', 'stats')
+    for (var key in gameObj) {
+        var statsCont = $('<div>').addClass('statsCont');
+        var statKey = $('<div>').addClass('statKey').text(key);
+        var statVal = $('<div>').addClass('statValue').text(gameObj[key]);
+        statsCont.append(statKey, statVal);
+        overallStatsDiv.append(statsCont);
+    }
+    $('.container').append(overallStatsDiv)
+}
+
+function gameDataFetch (game) {
+    //if fortnite, call that function data and grab that info
+    switch (game) {
+        case 'Fortnite':
+            console.log('fortnite')
+            break;
+        case 'Dota 2':
+            console.log('Dota 2')
+            //code
+            break;
+        case 'Battlefield 1': 
+            console.log('Battlefield 1')
+            //code
+            break; 
+    }
+    //if battlefield, call that function data
+    //if dota, call that function data 
+
 }
 
 // function getLeaguePlayers(){
@@ -178,17 +314,4 @@ function detFortnitePlayerData(playerName) {
 //         console.log(response);
 //       });
 // }
-
-
-
-function renderLivePlayersOnDom() {
-    
-    for (var i=0; i<onlinePlayerArray.length;i++){
-        
-        var playerCard = $("<div>").addClass("playerCard").css({
-            "background-image": "url("+onlinePlayerArray[i].thumbnail+")",
-        })
-        $("#livePlayers").append(playerCard);
-    }
-}
 

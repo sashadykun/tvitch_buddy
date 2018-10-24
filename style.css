@@ -1,3 +1,13 @@
+/* font-family: 'Oswald', sans-serif;
+font-family: 'PT Sans Narrow', sans-serif;
+font-family: 'Anton', sans-serif;
+font-family: 'Fjalla One', sans-serif; */
+
+body {
+    font-size: 0;
+    margin: 0;
+    background-image: linear-gradient(to top right, rgb(0, 60, 129), rgb(204, 0, 255));
+}
 .container {
     display: flex;
     justify-content: center;
@@ -36,4 +46,80 @@
     width: 45%;
     
     background-size: cover;
+}
+
+iframe {
+    opacity: 0;
+    display: flex;
+
+    justify-content: space-around;
+    
+    box-sizing: border-box;
+    width: 60vw;
+    height: 35vw;
+    animation: fadeIn;
+    animation-duration: 3s;
+    
+    animation-fill-mode: forwards;
+}
+
+#stats {
+    display: flex;
+    box-sizing: border-box;
+    justify-content: space-around;
+    
+    width: 40vw;
+    height: 35vw;
+    flex-flow: wrap;
+}
+
+.statCard {
+    
+    opacity: 0;
+    display: flex;
+    box-sizing: border-box;
+    
+    justify-content: space-around;
+    
+    width: 48%;
+    height: 23%;
+    animation-name: fadeIn ;
+    animation-duration: 2s;
+    animation-delay: 3s;
+    animation-fill-mode: forwards;
+    
+}
+.statKey {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    color: aliceblue;
+    display: flex;
+    font-size: 2.5vw;
+    width: 64%;
+    font-family: 'Anton', sans-serif;
+    background-color: rgba(0, 0, 0, 0.404);
+    border-radius: 3%;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.589);
+}
+
+.statValue {
+    justify-content: center;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    font-size: 2.5vw;
+    color: rgb(184, 247, 255);
+    
+    width: 34%;
+    font-family: 'Oswald', sans-serif;
+    background-color: rgba(53, 76, 83, 0.438);
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.589);
+    
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:100;}
 }
