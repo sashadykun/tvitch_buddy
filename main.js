@@ -2,9 +2,18 @@ $(document).ready(init);
 
 var arrayOfPlayers = [];
 
+var arrayCommaString = arrayOfPlayers.join();
 var twitchStreamer = "ninja";
 var onlinePlayerArray = [];
 
+var fortniteTopPlayers= {
+    ninja:"ninja",
+    nickmercs:"nickmercs",
+    TwitchProspering:"TwitchProspering",
+    TSM_Myth:"TSM_Myth",
+    CourageJD:"CourageJD"
+}
+ 
 var dotaPlayers = {
   masondota2: "315657960",
   dendi: "70388657",
@@ -167,7 +176,6 @@ function getDotaPlayers(player){
       console.log('DATA',gameDataDota)
     });
 }
-
 
 
 var fortnitePlayersData = [];
