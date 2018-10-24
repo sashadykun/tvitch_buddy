@@ -9,7 +9,8 @@ var dotaPlayers = {
   dendi: "70388657",
   arteezy: "104070670",
   sexyBamboe: "20321748",
-  singsing: "97577101"
+  singsing: "97577101",
+  darskyl: "161444478"
 }
 
 var bfPlayers = {
@@ -19,14 +20,21 @@ var bfPlayers = {
     misterkaiser: 'Mister_Kaiser',
     mistersamonte: 'MisterSamonte'
 }
+
+// var leaguePlayser = {
+//     froggen: '71899217'
+// }
+
 var gameDataBf;
 var gameDataFortNite;
 var gameDataDota = {}; 
+var gameDataLeague = {};
 
 function init () {
    getOnlinePlayers();
    getBfPlayerData('TwistyDoesntMlSS')
    getDotaPlayers("315657960");
+//    getLeaguePlayers()
 }
 
 function getBfPlayerData (player) {
@@ -48,7 +56,6 @@ function getBfPlayerData (player) {
             var deaths = response.result.basicStats.deaths;
             var accuracyRatio = response.result.accuracyRatio;
             gameDataBf = {'Player': player, 'Wins': wins, 'Losses': losses, 'Kills': kills, 'Deaths': deaths, 'Accuracy Ratio': accuracyRatio} 
-            console.log(gameDataBf)
         }
     }
     $.ajax(ajaxConfig)
@@ -68,7 +75,6 @@ function getOnlinePlayers(){
       $.ajax(settings).done(function (response) {
         makeOnlinePlayerObj(response)
         renderLivePlayersOnDom();
-        console.log(onlinePlayerArray);
       });
       
 }
@@ -87,8 +93,6 @@ function makeOnlinePlayerObj(response){
         tempPlayerObj.displayName = displayName;
         onlinePlayerArray.push(tempPlayerObj);
 
-
-        console.log(response);
     }}
     
 function getDotaPlayers(player){
@@ -126,7 +130,6 @@ function getDotaPlayers(player){
       }else{
         gameDataDota.Win = "win"
       }
-      console.log('DATA',gameDataDota)
     });
 }
 
@@ -139,7 +142,7 @@ var fortniteTopPlayers= [
     {name: 'CourageJD', gtag: 'CourageJD'},
 
 ]
-console.log (fortniteTopPlayers);
+
 
 var fortnitePlayersData = [];
 
@@ -160,12 +163,21 @@ function detFortnitePlayerData(playerName) {
     }
 
     $.ajax(settings).done(function (response) {
-        console.log(response);
         apiCallDataForTwitchProspering = response;
     });
 }
 
-
+// function getLeaguePlayers(){
+//     var accountInfo = {
+//         "url": "https://na1.api.riotgames.com/lol/summoner/v3/summoners/71899217?api_key=RGAPI-25569727-3b8d-4531-ad45-b80cd4d1a8f3",
+//         "method": "GET",
+//         dataType: "json"
+//         }
+      
+//       $.ajax(accountInfo).done(function (response) {
+//         console.log(response);
+//       });
+// }
 
 
 
