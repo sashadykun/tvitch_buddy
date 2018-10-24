@@ -42,21 +42,27 @@ body {
     height: 100%;
     width: 45%;
     background-size: cover;
+    overflow: hidden;
 }
 
 .playerCard:hover{
     opacity: 0.80;
 }
 
+.playerCard:hover > .nameCard{
+    top: 70%;
+}
+
 .nameCard{
     height: 30%;
     width: 100%;
-    top: 70%;
+    top: 99%;
     position: relative;
     text-align: center;
     color:white;
     background-color: black;
     opacity: 0.6;
+    transition: all .4s ease-out;
 }
 
 .name, .game{
