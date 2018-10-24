@@ -1,9 +1,22 @@
 $(document).ready(init);
 
-var arrayOfPlayers = ["HafiDHimMi", "nickmercs", "arteezy", "sexyBamboe",];
+
+// var arrayOfPlayers = ["HafiDHimMi", "nickmercs", "arteezy", "sexyBamboe"];
+
+var arrayOfPlayers = [];
+
 var arrayCommaString = arrayOfPlayers.join();
 var twitchStreamer = "ninja";
 var onlinePlayerArray = [];
+
+var fortniteTopPlayers= {
+    ninja:"ninja",
+    nickmercs:"nickmercs",
+    TwitchProspering:"TwitchProspering",
+    TSM_Myth:"TSM_Myth",
+    CourageJD:"CourageJD"
+}
+ 
 var dotaPlayers = {
   masondota2: "315657960",
   dendi: "70388657",
@@ -18,14 +31,45 @@ var bfPlayers = {
     Boccarossa13: 'Boccarossa',
     misterkaiser: 'Mister_Kaiser',
     mistersamonte: 'MisterSamonte'
+};
+var fortniteTopPlayers = {
+    'Ninja': 'Ninja',
+    'NickMercs': 'NICKMERCS',
+    'TwitchProspering': 'TwitchProspering',
+    'twitch_bogdanakh': 'twitch_bogdanakh',
+    'TSM_Myth': 'TSM_Myth',
+    'CourageJD': 'CourageJD',
+    'Dakotaz': 'Dakotaz',
+    'Ranger': 'WBG Ranger',
+    'SypherPK': 'SypherPK'
+
 }
+
+detFortnitePlayerData('NickMercs');
+
+
+var gameData = [];
+
 var gameDataBf;
 var gameDataFortNite;
-var gameDataDota; 
+var gameDataDota = {}; 
+
 
 function init () {
+   createAllPlayersArray(dotaPlayers, bfPlayers, fortniteTopPlayers);
    getOnlinePlayers();
-   getBfPlayerData('TwistyDoesntMlSS')
+
+   console.log('online: ', onlinePlayerArray);
+   
+}
+
+function createAllPlayersArray(firstArray, secondArray, thirdArray){
+    var newArray = [firstArray,secondArray,thirdArray]
+    for (var arrayIndex = 0; arrayIndex < newArray.length; arrayIndex++){
+        arrayOfPlayers.push(...Object.keys(newArray[arrayIndex]));
+
+    }
+
 }
 
 function getBfPlayerData (player) {
@@ -55,6 +99,7 @@ function getBfPlayerData (player) {
 
 
 function getOnlinePlayers(){
+    var arrayCommaString = arrayOfPlayers.join();
     var settings = {
         "async": true,
         "crossDomain": true,
@@ -92,6 +137,7 @@ function makeOnlinePlayerObj(response){
     }}
     
 function getDotaPlayers(player){
+    gameDataDota.Player = player;
    var accountInfo = {
       "url": "https://api.opendota.com/api/players/"+player,
       "method": "GET"
@@ -108,41 +154,32 @@ function getDotaPlayers(player){
     }
     
     $.ajax(accountInfo).done(function (response) {
-      dotaPlayers.soloRank = response.solo_competitive_rank
+        gameDataDota.SoloRank = response.solo_competitive_rank
     });
 
     $.ajax(winLoss).done(function (response2) {
-      dotaPlayers.wins = response2.win;
-      dotaPlayers.loses = response2.lose;
+        gameDataDota.Wins = response2.win;
+        gameDataDota.Loses = response2.lose;
     });
 
     $.ajax(previousGame).done(function (response3) {
-      dotaPlayers.kills = response3[0].kills;
-      dotaPlayers.deaths = response3[0].deaths;
-      dotaPlayers.assists = response3[0].assists;
+        gameDataDota.Kills = response3[0].kills;
+        gameDataDota.Deaths = response3[0].deaths;
+        gameDataDota.Assists = response3[0].assists;
       if(response3[0].radiant_win === false){
-        dotaPlayers.win = "lost"
+        gameDataDota.Win = "lost"
       }else{
-        dotaPlayers.win = "win"
+        gameDataDota.Win = "win"
       }
-      console.log(dotaPlayers)
+      console.log('DATA',gameDataDota)
     });
 }
 
-var fortniteTopPlayers= [
-    {name: 'Ninja', gtag: 'Ninja'},
-    {name: 'NickMercs', gtag: 'NICKMERCS'},
-    {name: 'TwitchProspering,  gtag: TwitchProspering' },
-    {name: 'twitch_bogdanakh', gtag: 'twitch_bogdanakh'},
-    {name: 'TSM_Myth', gtag: 'TSM_Myth'},
-    {name: 'CourageJD', gtag: 'CourageJD'},
-
-]
-console.log (fortniteTopPlayers);
 
 var fortnitePlayersData = [];
 
 function detFortnitePlayerData(playerName) {
+   var fortniteStatsObject = {};
     var settings = {
         "async": true,
         "crossDomain": true,
@@ -159,11 +196,14 @@ function detFortnitePlayerData(playerName) {
     }
 
     $.ajax(settings).done(function (response) {
-        console.log(response);
-        apiCallDataForTwitchProspering = response;
+        fortnitePlayersData = response;
+        console.log(fortnitePlayersData);
+        for (var index = 6; index < fortnitePlayersData.lifeTimeStats.length; index++){
+            fortniteStatsObject[fortnitePlayersData.lifeTimeStats[index].key]=fortnitePlayersData.lifeTimeStats[index].value;
+        }
+
     });
 }
-
 
 function renderLivePlayersOnDom() {
     
