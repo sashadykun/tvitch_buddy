@@ -24,7 +24,6 @@ var bfPlayers = {
     mistersamonte: 'MisterSamonte',
     Gen_Odyssey: 'Gen-Odyssey',
     th1r3een: 'l---th1r3een---I',
-    Papaschlauch1213: 'Papaschlauch1213'
 };
 var fortniteTopPlayers = {
     Ninja: 'Ninja',
@@ -36,6 +35,9 @@ var fortniteTopPlayers = {
     Dakotaz: 'Dakotaz',
     Ranger: 'WBG Ranger',
     SypherPK: 'SypherPK',
+    Svennoss: 'Svennoss',
+    uwatakashi: 'Uwatakashi_',
+    Fnatic_Ettnix:'Twitch-Ettnix'
 }
 var gameDataBf;
 var gameDataDota = {}; 
