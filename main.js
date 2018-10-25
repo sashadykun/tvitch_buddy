@@ -38,6 +38,9 @@ var fortniteTopPlayers = {
     Dakotaz: 'Dakotaz',
     Ranger: 'WBG Ranger',
     SypherPK: 'SypherPK',
+    Svennoss: 'Svennoss',
+    uwatakashi: 'Uwatakashi_',
+    Fnatic_Ettnix:'Twitch-Ettnix'
 }
 var gameDataBf;
 var gameDataDota = {}; 
