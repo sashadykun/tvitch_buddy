@@ -24,8 +24,10 @@ var bfPlayers = {
     mistersamonte: 'MisterSamonte',
     Gen_Odyssey: 'Gen-Odyssey',
     th1r3een: 'l---th1r3een---I',
-    Papaschlauch1213: 'Papaschlauch1213'
-};
+    julianjanganoo:'JulianJanganoo',
+    fragurassTV: 'fragurassTV',
+    TaisonTV:'TAISONTV'
+}
 var fortniteTopPlayers = {
     Ninja: 'Ninja',
     NICKMERCS: 'NICKMERCS',
