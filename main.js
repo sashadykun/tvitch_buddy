@@ -24,7 +24,10 @@ var bfPlayers = {
     mistersamonte: 'MisterSamonte',
     Gen_Odyssey: 'Gen-Odyssey',
     th1r3een: 'l---th1r3een---I',
-};
+    julianjanganoo:'JulianJanganoo',
+    fragurassTV: 'fragurassTV',
+    TaisonTV:'TAISONTV'
+}
 var fortniteTopPlayers = {
     Ninja: 'Ninja',
     NICKMERCS: 'NICKMERCS',
@@ -213,7 +216,9 @@ function getFortnitePlayerData(playerName) {
         }
     }
     $.ajax(settings).done(function (response) {
-        for (var index = 6; index < response.lifeTimeStats.length; index++){
+        console.log(response.epicUserHandle)
+        fortniteStatsObject['Player'] = response.epicUserHandle;
+        for (var index = 7; index < response.lifeTimeStats.length; index++){
             fortniteStatsObject[response.lifeTimeStats[index].key] = response.lifeTimeStats[index].value;
         }
         displayStats(fortniteStatsObject)
