@@ -27,8 +27,7 @@ var bfPlayers = {
     Gen_Odyssey: 'Gen-Odyssey',
     th1r3een: 'l---th1r3een---I',
     julianjanganoo:'JulianJanganoo',
-    fragurassTV: 'fragurassTV',
-    TaisonTV:'TAISONTV'
+    fragurassTV: 'fragurassTV'
 }
 var fortniteTopPlayers = {
     Ninja: 'Ninja',
