@@ -49,7 +49,8 @@ var codPlayers = {
     Xposed: 'Xposet',
     Blazt: 'lBlaztR',
     Dashy: 'Dashy-SZN',
-    aBeZy: 'aBeZy-'
+    aBeZy: 'aBeZy-',
+    pamaj: "pamaj",
 }
 var gameDataBf;
 var gameDataCod;
