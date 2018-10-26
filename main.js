@@ -40,7 +40,9 @@ var fortniteTopPlayers = {
     SypherPK: 'SypherPK',
     Svennoss: 'Svennoss',
     uwatakashi: 'Uwatakashi_',
-    Fnatic_Ettnix:'Twitch-Ettnix'
+    Fnatic_Ettnix:'Twitch-Ettnix',
+    trymacs:"twitch trymacs",
+    drnkie:"drnkie",
 }
 var codPlayers = {
     Rallied: 'RalDaddy',
