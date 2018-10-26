@@ -1,5 +1,4 @@
 $(document).ready(init);
-
 /*************************************************************************/
 //Global Variables go down here:
 var arrayOfPlayers = [];
@@ -273,11 +272,20 @@ function renderLivePlayersOnDom() {
             text:onlinePlayerArray[i].displayName,
             appendTo: nameCard
         })
-        let displayGame = $("<div>",{
-            addClass: "game",
-            text:onlinePlayerArray[i].game,
-            appendTo: nameCard
-        })
+        if(onlinePlayerArray[i].game === "Call of Duty: Black Ops 4"){
+            let displayGame = $("<div>",{
+                addClass: "game",
+                text:"Black Ops 4",
+                appendTo: nameCard
+            })
+        }
+        else {
+            let displayGame = $("<div>",{
+                addClass: "game",
+                text:onlinePlayerArray[i].game,
+                appendTo: nameCard
+            })
+        }
     }
 }
 
