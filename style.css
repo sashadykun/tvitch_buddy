@@ -203,6 +203,11 @@ iframe {
     right: 35%; 
 }
 
+.pic5{
+    position: relative;
+    right: 15%; 
+}
+
 img {
     height: 30%;
     width: 35%; 
