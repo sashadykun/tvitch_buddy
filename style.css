@@ -24,8 +24,8 @@ body {
     justify-content: space-between;
     width: 60%;
     height: 50%;
-    
-    overflow-x: scroll;
+    overflow-y: hidden;
+    overflow-x: auto;
 }
 
 .playerCard {
