@@ -182,7 +182,7 @@ iframe {
     position: relative;
     text-align: center;
     height: 70%;
-    width: 25%;
+    width: 20%;
     top: 15%;
     display: inline-block;
 }
@@ -194,15 +194,21 @@ iframe {
 
 .pic2 {
     position: relative;
-    left: 12.5%; 
+    left: 17.5%; 
 }
 
 .pic3 {
     position: relative;
-    right: 12.5%; 
+    /* right: 12.5%;  */
 }
 
 .pic4 {
+    position: relative;
+    right: 17.5%; 
+}
+
+
+.pic5 {
     position: relative;
     right: 35%; 
 }
