@@ -43,7 +43,17 @@ var fortniteTopPlayers = {
     uwatakashi: 'Uwatakashi_',
     Fnatic_Ettnix:'Twitch-Ettnix'
 }
+var codPlayers = {
+    Rallied: 'RalDaddy',
+    Octane: 'Octane623',
+    K1LLa93: 'AdamKIIIa',
+    Xposed: 'Xposet',
+    Blazt: 'lBlaztR',
+    Dashy: 'Dashy-SZN',
+    aBeZy: 'aBeZy-'
+}
 var gameDataBf;
+var gameDataCod;
 var gameDataDota = {}; 
 var gameDataLeague = {};
 var fortniteStatsObject = {};
@@ -52,12 +62,12 @@ var fortniteStatsObject = {};
 //All functions go down here:
 
 function init () {
-   createAllPlayersArray(dotaPlayers, bfPlayers, fortniteTopPlayers);
+   createAllPlayersArray(dotaPlayers, bfPlayers, fortniteTopPlayers, codPlayers);
    getOnlinePlayers();
 }
 
-function createAllPlayersArray(firstArray, secondArray, thirdArray){
-    var newArray = [firstArray,secondArray,thirdArray]
+function createAllPlayersArray(firstArray, secondArray, thirdArray, fourthArray){
+    var newArray = [firstArray,secondArray,thirdArray,fourthArray]
     for (var arrayIndex = 0; arrayIndex < newArray.length; arrayIndex++){
         arrayOfPlayers.push(...Object.keys(newArray[arrayIndex]));
     }
@@ -113,7 +123,7 @@ function getOnlinePlayers(){
 }
 
 function recreateOnlinePlayerArrayToHaveOnlyOurGamePlayers(){
-    var validGames = ["Battlefield 1", "Dota 2", "Fortnite"];
+    var validGames = ["Battlefield 1", "Dota 2", "Fortnite", "Call of Duty: Black Ops 4"];
     for (var arrayIndex = 0; arrayIndex<onlinePlayerArray.length; arrayIndex++){
         var currentGame = onlinePlayerArray[arrayIndex].game;
         if (!validGames.includes(currentGame)) {
@@ -179,7 +189,7 @@ function getDotaPlayers(player, name){
         else if(response.mmr_estimate.estimate >= 4160){
             gameDataDota.Rank = "Ancient 2"
         }
-        else if(response.mmr_estimate.estimate >= 4000){
+        else{
             gameDataDota.Rank = "Ancient 1"
         }
     });
@@ -224,6 +234,31 @@ function getFortnitePlayerData(playerName) {
         }
         displayStats(fortniteStatsObject)
         return
+    });
+}
+
+function getCodPlayers(player){
+    var codPlayer = {
+        "url": "https://my.callofduty.com/api/papi-client/crm/cod/v2/title/bo4/platform/psn/gamer/"+player+"/profile/",
+        "method": "GET",
+        dataType: "json"
+    }
+    $.ajax(codPlayer).done(function(response){
+        var stats = response.data.mp.lifetime.all;
+        var gameWins = stats.wins;
+        var gameLosses = stats.losses;
+        var kdr = stats.kdRatio;
+        var headshots = stats.headshots;
+        var accuracy = response.data.mp.weekly.all.accuracy;
+        gameDataCod = {
+            'Player': player, 
+            'Wins': gameWins, 
+            'Losses': gameLosses, 
+            'K/D': parseFloat(kdr).toFixed(1),
+            'Headshots': headshots, 
+            'Accuracy': parseFloat(accuracy*100).toFixed(1)+"%"
+        } 
+        displayStats(gameDataCod);
     });
 }
 
@@ -315,6 +350,13 @@ function gameDataFetch(game, streamName) {
                 if (key.toUpperCase() == streamName.toUpperCase()){
                     getBfPlayerData(bfPlayers[key])
                     return gameDataBf; 
+                }
+            }
+        case 'Call of Duty: Black Ops 4':
+            for (var key in codPlayers) {
+                if (key.toUpperCase() == streamName.toUpperCase()){
+                    getCodPlayers(codPlayers[key], key)
+                    return gameDataCod;
                 }
             }
     }
