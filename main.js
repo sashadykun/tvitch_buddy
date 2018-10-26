@@ -52,7 +52,7 @@ var codPlayers = {
     Blazt: 'lBlaztR',
     Dashy: 'Dashy-SZN',
     aBeZy: 'aBeZy-',
-    pamaj: "pamaj",
+    pamaj: "pamajino",
 }
 var gameDataBf;
 var gameDataCod;

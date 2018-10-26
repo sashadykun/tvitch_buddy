@@ -26,10 +26,14 @@ body {
     height: 50%;
 
     
-    overflow-x: scroll;
+    overflow-x: auto;
     overflow-y: hidden;
+    
 
 }
+::-webkit-scrollbar { 
+    display: none; 
+    }
 
 .playerCard {
     display: flex;
