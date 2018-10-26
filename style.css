@@ -21,18 +21,21 @@ body {
 
 #livePlayers {
     display: flex;
-    justify-content: space-around;
-    width: 80%;
+    justify-content: space-between;
+    width: 60%;
     height: 50%;
+    
+    overflow-x: scroll;
 }
 
 .playerCard {
     display: flex;
     cursor: pointer;
     height: 100%;
-    width: 25%;
+    width: 20%;
     background-size: cover;
-    overflow: hidden;
+    
+    flex-shrink: 0;
 }
 
 .playerCard2 {
@@ -96,6 +99,7 @@ iframe {
     width: 40vw;
     height: 35vw;
     flex-flow: wrap;
+    
 }
 
 .statCard {
