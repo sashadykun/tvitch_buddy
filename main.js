@@ -294,7 +294,8 @@ function displayVideo(twitchName) {
     $('#stats').remove();
     $('#footerContainer').remove();
     $('#headerContainer').remove();
-    $('#livePlayers').attr("id","livePlayers2");
+    $('.container').removeClass().addClass('containerVid');
+    $('#livePlayersContainer').removeAttr().attr('id', 'livePlayers2')
     $('.playerCard').removeClass('playerCard').addClass('playerCard2')
     var createIframe = $('<iframe>', {
         addClass: 'currentVideo',
@@ -306,7 +307,7 @@ function displayVideo(twitchName) {
             'scrolling': "no",
             'allowfullscreen': "true"
             }),
-        appendTo: $('.container')
+        appendTo: $('.containerVid')
     })
 }
 
@@ -319,7 +320,7 @@ function displayStats(gameObj) {
         statsCont.append(statKey, statVal);
         overallStatsDiv.append(statsCont);  
     }
-    $('.container').append(overallStatsDiv)
+    $('.containerVid').append(overallStatsDiv)
 }
 
 function gameDataFetch(game, streamName) {
@@ -328,28 +329,28 @@ function gameDataFetch(game, streamName) {
             for (var key in fortniteTopPlayers) {
                 if (key.toUpperCase() == streamName.toUpperCase()){
                     getFortnitePlayerData(fortniteTopPlayers[key])
-                    return fortniteStatsObject;
+                    break;
                 }
             }
         case 'Dota 2':
             for (var key in dotaPlayers) {
                 if (key.toUpperCase() == streamName.toUpperCase()){
                     getDotaPlayers(dotaPlayers[key], key)
-                    return gameDataDota;
+                    break;
                 }
             }
         case 'Battlefield 1': 
             for (var key in bfPlayers) {
                 if (key.toUpperCase() == streamName.toUpperCase()){
                     getBfPlayerData(bfPlayers[key])
-                    return gameDataBf; 
+                    break; 
                 }
             }
         case 'Call of Duty: Black Ops 4':
             for (var key in codPlayers) {
                 if (key.toUpperCase() == streamName.toUpperCase()){
                     getCodPlayers(codPlayers[key], key)
-                    return gameDataCod;
+                    break;
                 }
             }
     }
