@@ -294,14 +294,9 @@ function displayVideo(twitchName) {
     $('#stats').remove();
     $('#footerContainer').remove();
     $('#headerContainer').remove();
-    $('.container').remove();
-    $('#livePlayers').attr("id","livePlayers2");
+    $('.container').removeClass().addClass('containerVid');
+    $('#livePlayersContainer').removeAttr().attr('id', 'livePlayers2')
     $('.playerCard').removeClass('playerCard').addClass('playerCard2')
-    var newContainer = $('<div>', {
-        addClass: 'containerVid',
-        appendTo: $('body')
-    })
-    // newContainer.append('body')
     var createIframe = $('<iframe>', {
         addClass: 'currentVideo',
         attr: ({
@@ -312,7 +307,7 @@ function displayVideo(twitchName) {
             'scrolling': "no",
             'allowfullscreen': "true"
             }),
-        appendTo: newContainer
+        appendTo: $('.containerVid')
     })
 }
 
