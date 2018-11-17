@@ -6,9 +6,10 @@ body {
 
 .container {
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     flex-flow: wrap-reverse;
+    /* flex-direction: column; */
     height: 100vh;
     width: 100vw;
 }
@@ -19,11 +20,18 @@ body {
     width: 100%;
 }
 
+#livePlayersContainer{
+    width:100%; 
+    height: 60%;
+    display: flex;
+    justify-content: center;
+}
+
 #livePlayers {
     display: flex;
     /* justify-content: space-between; */
-    width: 60%;
-    height: 50%;
+    width: 70%;
+    height: 100%;
 
     
     overflow-x: auto;
@@ -173,10 +181,14 @@ iframe {
 }
 
 #footerContainer {
-    position: absolute;
+    /* position: absolute;
     top: 77%;
     width: 100%; 
-    height: 23%;
+    height: 23%; */
+    width: 100%;
+    height: 20%;
+    display: flex;
+    /* align-items: center; */
 }
 
 .footer {
@@ -185,7 +197,7 @@ iframe {
     width: 100%; 
 }
 
-.footBorder {
+/* .footBorder {
     position: relative;
     text-align: center;
     height: 70%;
@@ -206,7 +218,7 @@ iframe {
 
 .pic3 {
     position: relative;
-    /* right: 12.5%;  */
+    right: 12.5%; 
 }
 
 .pic4 {
@@ -218,10 +230,18 @@ iframe {
 .pic5 {
     position: relative;
     right: 35%; 
+} */
+
+.pic {
+    height: 100%; 
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 img {
-    height: 30%;
+    height: 60%;
     width: 35%; 
 }
 
@@ -231,30 +251,33 @@ img {
  }
 
 #headerContainer {
-    position: absolute;
-    top: 0; 
+    /* position: absolute; */
+    /* top: 0;  */
     width: 100%;
     height: 20%; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.header{
+/* .header{
     position: relative;
     width:100%; 
     height:100%; 
-}
-
+} */
+/* 
 .textBorder{
     position: relative;
     left: 15%;
     width: 70%; 
     height: 100%;
-}
+} */
 
 .text{
-    position: relative;
-    top: 40%;
+    /* position: relative;
+    top: 40%; */
     font-family: twitch;
     color: white;
     font-size: 5vmax; 
-    text-align: center;
+    /* text-align: center; */
 }

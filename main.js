@@ -342,14 +342,14 @@ function gameDataFetch(game, streamName) {
             for (var key in bfPlayers) {
                 if (key.toUpperCase() == streamName.toUpperCase()){
                     getBfPlayerData(bfPlayers[key])
-                    return; 
+                    break; 
                 }
             }
         case 'Call of Duty: Black Ops 4':
             for (var key in codPlayers) {
                 if (key.toUpperCase() == streamName.toUpperCase()){
                     getCodPlayers(codPlayers[key], key)
-                    return;
+                    break;
                 }
             }
     }
