@@ -294,8 +294,14 @@ function displayVideo(twitchName) {
     $('#stats').remove();
     $('#footerContainer').remove();
     $('#headerContainer').remove();
+    $('.container').remove();
     $('#livePlayers').attr("id","livePlayers2");
     $('.playerCard').removeClass('playerCard').addClass('playerCard2')
+    var newContainer = $('<div>', {
+        addClass: 'containerVid',
+        appendTo: $('body')
+    })
+    // newContainer.append('body')
     var createIframe = $('<iframe>', {
         addClass: 'currentVideo',
         attr: ({
@@ -306,7 +312,7 @@ function displayVideo(twitchName) {
             'scrolling': "no",
             'allowfullscreen': "true"
             }),
-        appendTo: $('.container')
+        appendTo: newContainer
     })
 }
 
@@ -319,7 +325,7 @@ function displayStats(gameObj) {
         statsCont.append(statKey, statVal);
         overallStatsDiv.append(statsCont);  
     }
-    $('.container').append(overallStatsDiv)
+    $('.containerVid').append(overallStatsDiv)
 }
 
 function gameDataFetch(game, streamName) {
