@@ -328,28 +328,28 @@ function gameDataFetch(game, streamName) {
             for (var key in fortniteTopPlayers) {
                 if (key.toUpperCase() == streamName.toUpperCase()){
                     getFortnitePlayerData(fortniteTopPlayers[key])
-                    return fortniteStatsObject;
+                    break;
                 }
             }
         case 'Dota 2':
             for (var key in dotaPlayers) {
                 if (key.toUpperCase() == streamName.toUpperCase()){
                     getDotaPlayers(dotaPlayers[key], key)
-                    return gameDataDota;
+                    break;
                 }
             }
         case 'Battlefield 1': 
             for (var key in bfPlayers) {
                 if (key.toUpperCase() == streamName.toUpperCase()){
                     getBfPlayerData(bfPlayers[key])
-                    return gameDataBf; 
+                    return; 
                 }
             }
         case 'Call of Duty: Black Ops 4':
             for (var key in codPlayers) {
                 if (key.toUpperCase() == streamName.toUpperCase()){
                     getCodPlayers(codPlayers[key], key)
-                    return gameDataCod;
+                    return;
                 }
             }
     }
