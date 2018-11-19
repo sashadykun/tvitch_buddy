@@ -66,8 +66,8 @@ function init () {
    getOnlinePlayers();
 }
 
-function createAllPlayersArray(firstArray, secondArray, thirdArray, fourthArray){
-    var newArray = [firstArray,secondArray,thirdArray,fourthArray]
+function createAllPlayersArray(firstObject, secondObject, thirdObject, fourthObject){
+    var newArray = [firstObject,secondObject,thirdObject,fourthObject]
     for (var arrayIndex = 0; arrayIndex < newArray.length; arrayIndex++){
         arrayOfPlayers.push(...Object.keys(newArray[arrayIndex]));
     }
@@ -125,10 +125,13 @@ function getOnlinePlayers(){
 function recreateOnlinePlayerArrayToHaveOnlyOurGamePlayers(){
     var validGames = ["Battlefield 1", "Dota 2", "Fortnite", "Call of Duty: Black Ops 4"];
     for (var arrayIndex = 0; arrayIndex<onlinePlayerArray.length; arrayIndex++){
+        debugger
         var currentGame = onlinePlayerArray[arrayIndex].game;
         if (!validGames.includes(currentGame)) {
             onlinePlayerArray.splice(arrayIndex,1);
+            arrayIndex--;
         }
+        
     }
 }
 
@@ -207,7 +210,7 @@ function getFortnitePlayerData(playerName) {
         }
     }
     $.ajax(settings).done(function (response) {
-        console.log(response.epicUserHandle)
+        
         fortniteStatsObject['Player'] = response.epicUserHandle;
         for (var index = 7; index < response.lifeTimeStats.length; index++){
             fortniteStatsObject[response.lifeTimeStats[index].key] = response.lifeTimeStats[index].value;
