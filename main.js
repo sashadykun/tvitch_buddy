@@ -66,9 +66,10 @@ function init() {
     getOnlinePlayers();
 }
 
-function createAllPlayersArray(firstArray, secondArray, thirdArray, fourthArray) {
-    var newArray = [firstArray, secondArray, thirdArray, fourthArray]
-    for (var arrayIndex = 0; arrayIndex < newArray.length; arrayIndex++) {
+
+function createAllPlayersArray(firstObject, secondObject, thirdObject, fourthObject){
+    var newArray = [firstObject,secondObject,thirdObject,fourthObject]
+    for (var arrayIndex = 0; arrayIndex < newArray.length; arrayIndex++){
         arrayOfPlayers.push(...Object.keys(newArray[arrayIndex]));
     }
 }
@@ -124,11 +125,15 @@ function getOnlinePlayers() {
 
 function recreateOnlinePlayerArrayToHaveOnlyOurGamePlayers() {
     var validGames = ["Battlefield 1", "Dota 2", "Fortnite", "Call of Duty: Black Ops 4"];
-    for (var arrayIndex = 0; arrayIndex < onlinePlayerArray.length; arrayIndex++) {
+
+    for (var arrayIndex = 0; arrayIndex<onlinePlayerArray.length; arrayIndex++){
         var currentGame = onlinePlayerArray[arrayIndex].game;
         if (!validGames.includes(currentGame)) {
-            onlinePlayerArray.splice(arrayIndex, 1);
+            onlinePlayerArray.splice(arrayIndex,1);
+            arrayIndex--;
+
         }
+        
     }
 }
 
@@ -205,7 +210,7 @@ function getFortnitePlayerData(playerName) {
         }
     }
     $.ajax(settings).done(function (response) {
-        console.log(response.epicUserHandle)
+        
         fortniteStatsObject['Player'] = response.epicUserHandle;
         for (var index = 7; index < response.lifeTimeStats.length; index++) {
             fortniteStatsObject[response.lifeTimeStats[index].key] = response.lifeTimeStats[index].value;
@@ -292,7 +297,9 @@ function displayVideo(twitchName) {
     $('#stats').remove();
     $('#footerContainer').remove();
     $('#headerContainer').remove();
-    $('#livePlayers').attr("id", "livePlayers2");
+    $('.container').removeClass().addClass('containerVid');
+    $('#livePlayersContainer').removeAttr().attr('id', 'livePlayers2')
+
     $('.playerCard').removeClass('playerCard').addClass('playerCard2')
     var createIframe = $('<iframe>', {
         addClass: 'currentVideo',
@@ -303,8 +310,8 @@ function displayVideo(twitchName) {
             'frameborder': "0",
             'scrolling': "no",
             'allowfullscreen': "true"
-        }),
-        appendTo: $('.container')
+            }),
+        appendTo: $('.containerVid')
     })
 }
 
@@ -317,7 +324,7 @@ function displayStats(gameObj) {
         statsCont.append(statKey, statVal);
         overallStatsDiv.append(statsCont);
     }
-    $('.container').append(overallStatsDiv)
+    $('.containerVid').append(overallStatsDiv)
 }
 
 function gameDataFetch(game, streamName) {
@@ -326,28 +333,29 @@ function gameDataFetch(game, streamName) {
             for (var key in fortniteTopPlayers) {
                 if (key.toUpperCase() == streamName.toUpperCase()) {
                     getFortnitePlayerData(fortniteTopPlayers[key])
-                    return fortniteStatsObject;
+                    break;
                 }
             }
         case 'Dota 2':
             for (var key in dotaPlayers) {
                 if (key.toUpperCase() == streamName.toUpperCase()) {
                     getDotaPlayers(dotaPlayers[key], key)
-                    return gameDataDota;
+                    break;
                 }
             }
         case 'Battlefield 1':
             for (var key in bfPlayers) {
                 if (key.toUpperCase() == streamName.toUpperCase()) {
                     getBfPlayerData(bfPlayers[key])
-                    return gameDataBf;
+                    break; 
+
                 }
             }
         case 'Call of Duty: Black Ops 4':
             for (var key in codPlayers) {
                 if (key.toUpperCase() == streamName.toUpperCase()) {
                     getCodPlayers(codPlayers[key], key)
-                    return gameDataCod;
+                    break;
                 }
             }
     }
