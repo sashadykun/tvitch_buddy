@@ -62,12 +62,14 @@ var fortniteStatsObject = {};
 //All functions go down here:
 
 function init() {
+    $("#headerContainer").click(displayHome)
     createAllPlayersArray(dotaPlayers, bfPlayers, fortniteTopPlayers, codPlayers);
     getOnlinePlayers();
 }
 
 
 function createAllPlayersArray(firstObject, secondObject, thirdObject, fourthObject){
+    arrayOfPlayers=[]
     var newArray = [firstObject,secondObject,thirdObject,fourthObject]
     for (var arrayIndex = 0; arrayIndex < newArray.length; arrayIndex++){
         arrayOfPlayers.push(...Object.keys(newArray[arrayIndex]));
@@ -138,6 +140,7 @@ function recreateOnlinePlayerArrayToHaveOnlyOurGamePlayers() {
 }
 
 function makeOnlinePlayerObj(response) {
+    onlinePlayerArray=[]
     for (var i = 0; i < response.streams.length; i++) {
         var tempPlayerObj = {};
         var streamingGame = response.streams[i].game;
@@ -148,6 +151,7 @@ function makeOnlinePlayerObj(response) {
         tempPlayerObj.game = streamingGame;
         tempPlayerObj.thumbnail = thumbnail;
         tempPlayerObj.displayName = displayName;
+        
         onlinePlayerArray.push(tempPlayerObj);
     }
 }
@@ -300,6 +304,7 @@ function displayVideo(twitchName) {
     $('.container').removeClass().addClass('containerVid');
     $('#livePlayersContainer').removeAttr().attr('id', 'livePlayers2')
 
+
     $('.playerCard').removeClass('playerCard').addClass('playerCard2')
     var createIframe = $('<iframe>', {
         addClass: 'currentVideo',
@@ -313,6 +318,25 @@ function displayVideo(twitchName) {
             }),
         appendTo: $('.containerVid')
     })
+}
+
+function displayHome() {
+    console.log("clicked")
+    
+    $('#livePlayers').empty()
+    $('iframe').remove();
+    $('#stats').remove();
+    $('#footerContainer').remove()
+    $('#headerContainer').remove();
+    $('.containerVid').removeClass().addClass('container');
+    $('#livePlayers2').removeAttr().attr('id', 'livePlayersContainer')
+    createAllPlayersArray(dotaPlayers, bfPlayers, fortniteTopPlayers, codPlayers);
+    getOnlinePlayers();
+
+    // $('.playerCard2').removeClass('playerCard2').addClass('playerCard')
+    
+    
+    
 }
 
 function displayStats(gameObj) {
