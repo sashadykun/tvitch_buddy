@@ -267,7 +267,7 @@ function renderLivePlayersOnDom() {
             appendTo: $("#livePlayers"),
         })
         let nameCard = $("<div>", {
-            addClass: "nameCard",
+            addClass: "nameCard nameCard2",
             appendTo: playerCard
         })
         let displayName = $("<div>", {

@@ -8,7 +8,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* flex-flow: wrap-reverse; */
     flex-direction: column;
     height: 100vh;
     width: 100vw;
@@ -36,28 +35,27 @@ body {
 
 #livePlayers {
     display: flex;
-    /* justify-content: space-between; */
-    width: 70%;
+    width: 100%;
     height: 100%;
-
-    
-    overflow-x: auto;
-    overflow-y: hidden;
-    
-
+    overflow-x: hidden;
+    overflow-y: scroll;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 ::-webkit-scrollbar { 
     display: none; 
-    }
+}
 
 .playerCard {
     display: flex;
     cursor: pointer;
-    height: 100%;
-    width: 20%;
+    height: 49.5%;
+    width: 40%;
     background-size: cover;
-    
+    position: relative;
     flex-shrink: 0;
+    overflow: hidden;
+    border: 1px groove white;
 }
 
 .playerCard2 {
@@ -68,35 +66,66 @@ body {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: bottom;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
-.playerCard:hover{
+.playerCard:hover .nameCard{
     opacity: 0.80;
+    height: 35%;
 }
 
 .playerCard:hover > .nameCard{
     top: 65%;
 }
 
-.playerCard2:hover{
+.playerCard2:hover .nameCard{
     opacity: 0.80;
+    height: 35%;
 }
 
 .playerCard2:hover > .nameCard{
     top: 65%;
 }
 
+.playerCard2 > .nameCard{
+    width: 20%;
+    overflow: hidden;
+}
+
 .nameCard{
-    height: 35%;
+    height: 0;
     width: 100%;
     top: 100%;
-    position: relative;
+    position: absolute;
     text-align: center;
     color:white;
     background-color: rgba(0, 0, 0, 0.555);
     transition: all .4s ease-out;
+    display: flex;
+    font-size: 1.5vw;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
 }
+
+/* .nameCard2{
+    height: 0;
+    width: 14%;
+    top: 100%;
+    position: absolute;
+    text-align: center;
+    color:white;
+    background-color: rgba(0, 0, 0, 0.555);
+    transition: all .4s ease-out;
+    display: flex;
+    font-size: 1.5vw;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    overflow: hidden;
+} */
 
 .displayNone{
     display: none;
@@ -164,12 +193,7 @@ iframe {
 }
 
 .nameCard {
-    display: flex;
-    font-size: 1.5vw;
-    flex-flow: column;
-    align-items: center;
-    justify-content: center;
-    color: white;
+    
 }
 
 .name {
