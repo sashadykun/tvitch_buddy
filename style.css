@@ -20,8 +20,8 @@ body {
     justify-content: center;
     align-items: center;
     flex-flow: wrap-reverse;
-    height: 100vh;
-    width: 100vw;
+    width: 100%;
+    height: 80%;
 }
 #livePlayers2 {
     display: flex;
@@ -45,6 +45,24 @@ body {
     flex-wrap: wrap;
     justify-content: center;
 }
+
+.livePlayersFooterContainer {
+    width:100%; 
+    height: 24%;
+    display: flex;
+    justify-content: center;
+}
+
+.livePlayersFooter {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 ::-webkit-scrollbar { 
     display: none; 
 }
@@ -66,10 +84,9 @@ body {
     cursor: pointer;
     height: 100%;
     width: 20%;
-    background-size: contain;
     background-repeat: no-repeat;
-    background-position: bottom;
-    /* overflow: hidden; */
+    background-size: cover;
+    overflow: hidden;
 }
 
 .playerCard:hover .nameCard{
@@ -81,17 +98,17 @@ body {
     top: 65%;
 }
 
-.playerCard2:hover .nameCard{
+.playerCard2:hover .nameCard2{
     opacity: 0.80;
-    height: 35%;
+    height: 100%;
 }
 
-.playerCard2:hover > .nameCard{
-    top: 65%;
+.playerCard2:hover > .nameCard2{
+    top: 0%;
 }
 
-.playerCard2 > .nameCard{
-    width: 20%;
+.playerCard2 > .nameCard2{
+    width: 100%;
     overflow: hidden;
 }
 
@@ -110,11 +127,12 @@ body {
     align-items: center;
     justify-content: center;
     color: white;
+    position: absolute;
 }
 
-/* .nameCard2{
+.nameCard2{
     height: 0;
-    width: 14%;
+    width: 100%;
     top: 100%;
     position: absolute;
     text-align: center;
@@ -127,8 +145,8 @@ body {
     align-items: center;
     justify-content: center;
     color: white;
-    overflow: hidden;
-} */
+    position: relative;
+}
 
 .displayNone{
     display: none;

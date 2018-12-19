@@ -271,7 +271,7 @@ function renderLivePlayersOnDom() {
             appendTo: $("#livePlayers"),
         })
         let nameCard = $("<div>", {
-            addClass: "nameCard nameCard2",
+            addClass: "nameCard",
             appendTo: playerCard
         })
         let displayName = $("<div>", {
@@ -300,9 +300,29 @@ function displayVideo(twitchName) {
     $('iframe').remove();
     $('#stats').remove();
     $('#footerContainer').remove();
+    $('#livePlayersContainer').remove();
     $('#headerContainer').remove();
-    $('.container').removeClass().addClass('containerVid');
-    $('#livePlayersContainer').removeAttr().attr('id', 'livePlayers2')
+    $('.livePlayersFooterContainer').remove();
+    $('.containerVid').remove();
+
+    let videoContainer = $('<div>', {
+        class: 'containerVid',
+        appendTo: '.container'
+    })
+    let livePlayersContainer = $('<div>',  {
+        id: 'livePlayersContainer',
+        appendTo: '.container'
+    })
+    let livePlayersBar = $('<div>', {
+        id: 'livePlayers',
+        appendTo: '#livePlayersContainer'
+    })
+
+    renderLivePlayersOnDom();
+    livePlayersContainer.removeAttr('id').addClass('livePlayersFooterContainer')
+    livePlayersBar.removeAttr('id').addClass('livePlayersFooter')
+    $('.nameCard').removeClass('nameCard').addClass('nameCard2')
+
 
 
     $('.playerCard').removeClass('playerCard').addClass('playerCard2')
