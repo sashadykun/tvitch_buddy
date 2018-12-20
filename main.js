@@ -348,14 +348,14 @@ function displayVideo(twitchName) {
 function displayHome() {
     $("#arrows").removeClass("hide")
     console.log("clicked")
-    $('.playerCard').removeClass()
+    $('.playerCard').removeClass().addClass("playerCard")
     $('#livePlayersContainer').removeClass().addClass("livePlayersContainer")
     $('#livePlayers').empty()
     $('iframe').remove();
     $('#stats').remove();
     $('#footerContainer').removeClass("hide")
     $('#headerContainer').removeClass();
-    $('#container').removeClass();
+    $('#container').removeClass().addClass("container1");
     $('#livePlayers2').removeAttr().attr('id', 'livePlayersContainer')
     arrayOfPlayers=[]
     onlinePlayerArray=[]
