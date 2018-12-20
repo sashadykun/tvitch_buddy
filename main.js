@@ -62,9 +62,38 @@ var fortniteStatsObject = {};
 //All functions go down here:
 
 function init() {
+    $("#headerContainer").click(displayHome)
     createAllPlayersArray(dotaPlayers, bfPlayers, fortniteTopPlayers, codPlayers);
     getOnlinePlayers();
+    $("#arrow-right").click(scrollRight)
+    $("#arrow-left").click(scrollLeft)
 }
+//
+// function init() {
+//     $("#headerContainer").click(displayHome)
+//     $("#arrow-right").click(scrollRight)
+//     $("#arrow-left").click(scrollLeft)
+//     createAllPlayersArray(dotaPlayers, bfPlayers, fortniteTopPlayers, codPlayers);
+//     getOnlinePlayers();
+// }
+
+function scrollRight(){
+    var elmnt = document.getElementById("livePlayers");
+    var w = elmnt.clientWidth
+    $('#livePlayers').animate({ scrollLeft: "+="+w }, "slow");
+    
+    // elmnt.scrollLeft += w;
+      
+}
+function scrollLeft(){
+    var elmnt = document.getElementById("livePlayers");
+    var w = elmnt.clientWidth
+    $('#livePlayers').animate({ scrollLeft: "-="+w }, "slow");
+    
+    // elmnt.scrollLeft += w;
+      
+}
+//
 
 
 function createAllPlayersArray(firstObject, secondObject, thirdObject, fourthObject){
@@ -138,6 +167,7 @@ function recreateOnlinePlayerArrayToHaveOnlyOurGamePlayers() {
 }
 
 function makeOnlinePlayerObj(response) {
+    onlinePlayerArray=[]
     for (var i = 0; i < response.streams.length; i++) {
         var tempPlayerObj = {};
         var streamingGame = response.streams[i].game;
@@ -293,14 +323,15 @@ function renderLivePlayersOnDom() {
 }
 
 function displayVideo(twitchName) {
+    $("#arrows").removeClass("hide").addClass("hide")
     $('iframe').remove();
     $('#stats').remove();
-    $('#footerContainer').remove();
-    $('#headerContainer').remove();
-    $('.container').removeClass().addClass('containerVid');
-    $('#livePlayersContainer').removeAttr().attr('id', 'livePlayers2')
-
-    $('.playerCard').removeClass('playerCard').addClass('playerCard2')
+    $('#footerContainer').removeClass().addClass("hide");
+    $('#headerContainer').removeClass().addClass("hide");
+    $('#container').removeClass().addClass('containerSecondPage');
+    $('#livePlayersContainer').removeClass().addClass("livePlayersContainerSecondPage")
+    $('.playerCard').removeClass().addClass("playerCardSecondPage")
+    $('#livePlayers').removeClass().addClass('livePlayersSecondPage')
     var createIframe = $('<iframe>', {
         addClass: 'currentVideo',
         attr: ({
@@ -311,8 +342,30 @@ function displayVideo(twitchName) {
             'scrolling': "no",
             'allowfullscreen': "true"
             }),
-        appendTo: $('.containerVid')
+        appendTo: $('#container')
     })
+}
+function displayHome() {
+    $("#arrows").removeClass("hide")
+    console.log("clicked")
+    $('.playerCard').removeClass()
+    $('#livePlayersContainer').removeClass().addClass("livePlayersContainer")
+    $('#livePlayers').empty()
+    $('iframe').remove();
+    $('#stats').remove();
+    $('#footerContainer').removeClass("hide")
+    $('#headerContainer').removeClass();
+    $('#container').removeClass();
+    $('#livePlayers2').removeAttr().attr('id', 'livePlayersContainer')
+    arrayOfPlayers=[]
+    onlinePlayerArray=[]
+    createAllPlayersArray(dotaPlayers, bfPlayers, fortniteTopPlayers, codPlayers);
+    getOnlinePlayers();
+
+    // $('.playerCard2').removeClass('playerCard2').addClass('playerCard')
+    
+    
+    
 }
 
 function displayStats(gameObj) {
@@ -324,7 +377,7 @@ function displayStats(gameObj) {
         statsCont.append(statKey, statVal);
         overallStatsDiv.append(statsCont);
     }
-    $('.containerVid').append(overallStatsDiv)
+    $('#container').append(overallStatsDiv)
 }
 
 function gameDataFetch(game, streamName) {
