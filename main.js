@@ -63,11 +63,19 @@ var fortniteStatsObject = {};
 
 function init() {
     $("#headerContainer").click(displayHome)
-    $("#arrow-right").click(scrollRight)
-    $("#arrow-left").click(scrollLeft)
     createAllPlayersArray(dotaPlayers, bfPlayers, fortniteTopPlayers, codPlayers);
     getOnlinePlayers();
+    $("#arrow-right").click(scrollRight)
+    $("#arrow-left").click(scrollLeft)
 }
+//
+// function init() {
+//     $("#headerContainer").click(displayHome)
+//     $("#arrow-right").click(scrollRight)
+//     $("#arrow-left").click(scrollLeft)
+//     createAllPlayersArray(dotaPlayers, bfPlayers, fortniteTopPlayers, codPlayers);
+//     getOnlinePlayers();
+// }
 
 function scrollRight(){
     var elmnt = document.getElementById("livePlayers");
@@ -85,9 +93,10 @@ function scrollLeft(){
     // elmnt.scrollLeft += w;
       
 }
+//
+
 
 function createAllPlayersArray(firstObject, secondObject, thirdObject, fourthObject){
-    arrayOfPlayers=[]
     var newArray = [firstObject,secondObject,thirdObject,fourthObject]
     for (var arrayIndex = 0; arrayIndex < newArray.length; arrayIndex++){
         arrayOfPlayers.push(...Object.keys(newArray[arrayIndex]));
@@ -169,7 +178,6 @@ function makeOnlinePlayerObj(response) {
         tempPlayerObj.game = streamingGame;
         tempPlayerObj.thumbnail = thumbnail;
         tempPlayerObj.displayName = displayName;
-        
         onlinePlayerArray.push(tempPlayerObj);
     }
 }
@@ -273,7 +281,6 @@ function getCodPlayers(player, name) {
 
 function renderLivePlayersOnDom() {
     recreateOnlinePlayerArrayToHaveOnlyOurGamePlayers();
-    $(".livePlayers").empty()
     onlinePlayerArray.sort(function (a, b) { return 0.5 - Math.random() });
     for (let i = 0; i < onlinePlayerArray.length; i++) {
         let playerCard = $("<div>", {
@@ -290,7 +297,7 @@ function renderLivePlayersOnDom() {
             appendTo: $("#livePlayers"),
         })
         let nameCard = $("<div>", {
-            addClass: "nameCard",
+            addClass: "nameCard nameCard2",
             appendTo: playerCard
         })
         let displayName = $("<div>", {
@@ -316,50 +323,15 @@ function renderLivePlayersOnDom() {
 }
 
 function displayVideo(twitchName) {
+    $("#arrows").removeClass("hide").addClass("hide")
     $('iframe').remove();
     $('#stats').remove();
-    $('#footerContainer').remove();
-    $('#livePlayersContainer').remove();
-    $('#headerContainer').remove();
-
-    $("#arrows").addClass("hide")
-    $('.container').removeClass().addClass('containerVid');
-    $('#livePlayersContainer').removeAttr().attr('id', 'livePlayers2')
-
-    $('.livePlayersFooterContainer').remove();
-    $('.containerVid').remove();
-
-    let videoContainer = $('<div>', {
-        class: 'containerVid',
-        appendTo: '.container'
-    })
-    let livePlayersContainer = $('<div>',  {
-        id: 'livePlayersContainer',
-        appendTo: '.container'
-    })
-    let livePlayersBar = $('<div>', {
-        id: 'livePlayers',
-        appendTo: '#livePlayersContainer'
-    })
-    
-    let loader = $('<div>', {
-        class: 'loader',
-        appendTo: '.containerVid'
-    })
-
-    setInterval(function(){
-        loader.removeClass('loader')
-    }, 3500)
-
-    renderLivePlayersOnDom();
-    livePlayersContainer.removeAttr('id').addClass('livePlayersFooterContainer')
-    livePlayersBar.removeAttr('id').addClass('livePlayersFooter')
-    $('.nameCard').removeClass('nameCard').addClass('nameCard2')
-
-
-
-
-    $('.playerCard').removeClass('playerCard').addClass('playerCard2')
+    $('#footerContainer').removeClass().addClass("hide");
+    $('#headerContainer').removeClass().addClass("hide");
+    $('#container').removeClass().addClass('containerSecondPage');
+    $('#livePlayersContainer').removeClass().addClass("livePlayersContainerSecondPage")
+    $('.playerCard').removeClass().addClass("playerCardSecondPage")
+    $('#livePlayers').removeClass().addClass('livePlayersSecondPage')
     var createIframe = $('<iframe>', {
         addClass: 'currentVideo',
         attr: ({
@@ -370,21 +342,23 @@ function displayVideo(twitchName) {
             'scrolling': "no",
             'allowfullscreen': "true"
             }),
-        appendTo: $('.containerVid')
+        appendTo: $('#container')
     })
-    // $('.loader').removeClass('loader')
 }
-
 function displayHome() {
-    console.log("clicked")
     $("#arrows").removeClass("hide")
+    console.log("clicked")
+    $('.playerCard').removeClass()
+    $('#livePlayersContainer').removeClass().addClass("livePlayersContainer")
     $('#livePlayers').empty()
     $('iframe').remove();
     $('#stats').remove();
-    $('#footerContainer').remove()
-    $('#headerContainer').remove();
-    $('.containerVid').removeClass().addClass('container');
+    $('#footerContainer').removeClass("hide")
+    $('#headerContainer').removeClass();
+    $('#container').removeClass();
     $('#livePlayers2').removeAttr().attr('id', 'livePlayersContainer')
+    arrayOfPlayers=[]
+    onlinePlayerArray=[]
     createAllPlayersArray(dotaPlayers, bfPlayers, fortniteTopPlayers, codPlayers);
     getOnlinePlayers();
 
@@ -403,7 +377,7 @@ function displayStats(gameObj) {
         statsCont.append(statKey, statVal);
         overallStatsDiv.append(statsCont);
     }
-    $('.containerVid').append(overallStatsDiv)
+    $('#container').append(overallStatsDiv)
 }
 
 function gameDataFetch(game, streamName) {
