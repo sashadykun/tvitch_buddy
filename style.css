@@ -52,8 +52,8 @@ body {
     justify-content: center;
     align-items: center;
     flex-flow: wrap-reverse;
-    height: 100vh;
-    width: 100vw;
+    width: 100%;
+    height: 80%;
 }
 #livePlayers2 {
     display: flex;
@@ -79,6 +79,25 @@ body {
     flex-direction: row;
     justify-content: flex-start;
 }
+
+.livePlayersFooterContainer {
+    width:100%; 
+    height: 24%;
+    display: flex;
+    justify-content: center;
+}
+
+.livePlayersFooter {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    /* overflow-y: scroll; */
+    overflow-y: hidden;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 ::-webkit-scrollbar { 
     display: none; 
 }
@@ -100,10 +119,9 @@ body {
     cursor: pointer;
     height: 100%;
     width: 20%;
-    background-size: contain;
     background-repeat: no-repeat;
-    background-position: bottom;
-    /* overflow: hidden; */
+    background-size: cover;
+    overflow: hidden;
 }
 
 .playerCard:hover .nameCard{
@@ -115,17 +133,17 @@ body {
     top: 65%;
 }
 
-.playerCard2:hover .nameCard{
+.playerCard2:hover .nameCard2{
     opacity: 0.80;
-    height: 35%;
+    height: 100%;
 }
 
-.playerCard2:hover > .nameCard{
-    top: 65%;
+.playerCard2:hover > .nameCard2{
+    top: 0%;
 }
 
-.playerCard2 > .nameCard{
-    width: 20%;
+.playerCard2 > .nameCard2{
+    width: 100%;
     overflow: hidden;
 }
 
@@ -144,11 +162,12 @@ body {
     align-items: center;
     justify-content: center;
     color: white;
+    position: absolute;
 }
 
-/* .nameCard2{
+.nameCard2{
     height: 0;
-    width: 14%;
+    width: 100%;
     top: 100%;
     position: absolute;
     text-align: center;
@@ -161,8 +180,8 @@ body {
     align-items: center;
     justify-content: center;
     color: white;
-    overflow: hidden;
-} */
+    position: relative;
+}
 
 .displayNone{
     display: none;
@@ -293,18 +312,95 @@ img {
     font-size: 5vmax; 
 }
 
-@media only screen and (min-device-width : 300px) and (max-device-width : 400px) and (orientation : portrait) {
-    img {
-        height: 30%;
-        width: 90%;
+/*Small Screen Sizes*/
+/* @media (max-height: 414px) {
+    #livePlayers {
+        display: flex;
+        width: 89%;
+        height: 100%;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    #footerContainer {
+        display: none;
     }
     .text {
         font-family: twitch;
         color: white;
-        font-size: 3vmax;
+        font-size: 2.5vmax;
+    }
+    .playerCard {
+        display: flex;
+        cursor: pointer;
+        height: 100%;
+        width: 50%;
+        background-size: contain;
+        position: relative;
+        flex-shrink: 0;
+        overflow: hidden;
+        border: 1px groove white;
+    }
+} */
+/* Desktops */
+@media (min-width: 1281px) {
+  }
+  
+/* Laptops/Desktops */
+@media (min-width: 1025px) and (max-width: 1280px) {
+    img {
+        height: 65%;
+        width: 40%;
     }
 }
 
+/* Tablets, Ipads, Portrait */
+@media (min-width: 768px) and (max-width: 1024px) {
+    img {
+        height: 60%;
+        width: 50%;
+    }
+}
+
+/* Low Res Tablets, Mobile Phones (Landscape) */
+@media (min-width: 481px) and (max-width: 767px) {
+    img {
+        height: 45%;
+        width: 60%;
+    }
+}
+
+/*Small Screen Sizes*/
+@media (max-width: 481px) {
+    img {
+        height: 35%;
+        width: 60%;
+    }
+}
+
+ 
+/* iPhone 6+, 7+, 8+ ----------- */
+@media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 2){
+/* Styles */
+}
+    
+@media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
+    img {
+        height: 35%;
+        width: 65%; 
+    }
+}
+
+
+/* iPad ----------- */
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+    img {
+        height: 50%;
+        width: 65%;
+    }
+}
 
 /* iPad Pro ----------- */
 @media only screen and (min-device-width : 1024px) and (max-device-width : 1366px) and (orientation : landscape) {
@@ -314,27 +410,31 @@ img {
     }
 }
 
-/* iPad ----------- */
-
-@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+/* iPhone 5 ----------- */
+@media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 2){
     img {
-        height: 50%;
+        height: 65%;
+        width: 45%;
+    }
+}
+
+/* iPhone 4 ----------- */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : landscape) and (-webkit-min-device-pixel-ratio : 2) {
+    img {
+        height: 55%;
+        width: 40%;
+    }
+    
+}
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : portrait) and (-webkit-min-device-pixel-ratio : 2) {
+    img {
+        height: 35%;
         width: 60%;
     }
-}
-
-/* Pixel Portrait */
-@media screen and (device-width: 411px) and (device-height: 823px) and (-webkit-device-pixel-ratio: 3.5) and (orientation: portrait) {
-    img {     
-        height: 40%;
-        width: 70%;
-    }
-}
-
-@media screen and (device-width: 823px) and (device-height: 411px) and (-webkit-device-pixel-ratio: 3.5) and (orientation: landscape) {
-    img {
-        height: 70%;
-        width: 40%;
+    .text {
+        font-family: twitch;
+        color: white;
+        font-size: 6vmax;
     }
 }
 
@@ -345,16 +445,11 @@ img {
         width: 35%;
     }
 }
-@media only screen and (min-device-width: 375px) and (max-device-height: 812px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 3){
+@media only screen and (min-device-width: 375px) and (min-device-height: 812px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 3){
     img {
         height: 35%;
-        width: 65%;
+        width: 75%;
     }
-}
-
-
-/* Samsung Galaxy S5 ----------- */
-@media only screen and (min-device-width: 360px) and (max-device-height: 640px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 3){
     .text {
         font-family: twitch;
         color: white;
@@ -362,16 +457,84 @@ img {
     }
 }
 
-/* iPhone 4 ----------- */
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : landscape) and (-webkit-min-device-pixel-ratio : 2) {
-    img {
-        height: 55%;
-        width: 40%;
+.loader {
+    color: #ffffff;
+    font-size: 50px;
+    text-indent: -9999em;
+    overflow: hidden;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    margin: 72px auto;
+    position: absolute;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-animation: load6 1.7s infinite ease, round 1.7s infinite ease;
+    animation: load6 1.7s infinite ease, round 1.7s infinite ease;
+  }
+  @-webkit-keyframes load6 {
+    0% {
+      box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
     }
-}
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : portrait) and (-webkit-min-device-pixel-ratio : 2) {
-    img {
-        height: 40%;
-        width: 60%;
+    5%,
+    95% {
+      box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
     }
-}
+    10%,
+    59% {
+      box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em, -0.297em -0.775em 0 -0.477em;
+    }
+    20% {
+      box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em, -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em, -0.749em -0.34em 0 -0.477em;
+    }
+    38% {
+      box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em, -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em, -0.82em -0.09em 0 -0.477em;
+    }
+    100% {
+      box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+    }
+  }
+  @keyframes load6 {
+    0% {
+      box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+    }
+    5%,
+    95% {
+      box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+    }
+    10%,
+    59% {
+      box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em, -0.297em -0.775em 0 -0.477em;
+    }
+    20% {
+      box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em, -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em, -0.749em -0.34em 0 -0.477em;
+    }
+    38% {
+      box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em, -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em, -0.82em -0.09em 0 -0.477em;
+    }
+    100% {
+      box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+    }
+  }
+  @-webkit-keyframes round {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes round {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  
