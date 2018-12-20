@@ -63,10 +63,28 @@ var fortniteStatsObject = {};
 
 function init() {
     $("#headerContainer").click(displayHome)
+    $("#arrow-right").click(scrollRight)
+    $("#arrow-left").click(scrollLeft)
     createAllPlayersArray(dotaPlayers, bfPlayers, fortniteTopPlayers, codPlayers);
     getOnlinePlayers();
 }
 
+function scrollRight(){
+    var elmnt = document.getElementById("livePlayers");
+    var w = elmnt.clientWidth
+    $('#livePlayers').animate({ scrollLeft: "+="+w }, "slow");
+    
+    // elmnt.scrollLeft += w;
+      
+}
+function scrollLeft(){
+    var elmnt = document.getElementById("livePlayers");
+    var w = elmnt.clientWidth
+    $('#livePlayers').animate({ scrollLeft: "-="+w }, "slow");
+    
+    // elmnt.scrollLeft += w;
+      
+}
 
 function createAllPlayersArray(firstObject, secondObject, thirdObject, fourthObject){
     arrayOfPlayers=[]
@@ -255,6 +273,7 @@ function getCodPlayers(player, name) {
 
 function renderLivePlayersOnDom() {
     recreateOnlinePlayerArrayToHaveOnlyOurGamePlayers();
+    $(".livePlayers").empty()
     onlinePlayerArray.sort(function (a, b) { return 0.5 - Math.random() });
     for (let i = 0; i < onlinePlayerArray.length; i++) {
         let playerCard = $("<div>", {
@@ -301,6 +320,7 @@ function displayVideo(twitchName) {
     $('#stats').remove();
     $('#footerContainer').remove();
     $('#headerContainer').remove();
+    $("#arrows").addClass("hide")
     $('.container').removeClass().addClass('containerVid');
     $('#livePlayersContainer').removeAttr().attr('id', 'livePlayers2')
 
@@ -322,7 +342,7 @@ function displayVideo(twitchName) {
 
 function displayHome() {
     console.log("clicked")
-    
+    $("#arrows").removeClass("hide")
     $('#livePlayers').empty()
     $('iframe').remove();
     $('#stats').remove();
