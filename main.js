@@ -317,6 +317,15 @@ function displayVideo(twitchName) {
         id: 'livePlayers',
         appendTo: '#livePlayersContainer'
     })
+    
+    let loader = $('<div>', {
+        class: 'loader',
+        appendTo: '.containerVid'
+    })
+
+    setInterval(function(){
+        loader.removeClass('loader')
+    }, 3500)
 
     renderLivePlayersOnDom();
     livePlayersContainer.removeAttr('id').addClass('livePlayersFooterContainer')
@@ -338,6 +347,7 @@ function displayVideo(twitchName) {
             }),
         appendTo: $('.containerVid')
     })
+    // $('.loader').removeClass('loader')
 }
 
 function displayHome() {
