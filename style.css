@@ -3,6 +3,38 @@ body {
     margin: 0;
     background-image: linear-gradient(to top right, rgb(0, 0, 0), #6441A4);
 }
+
+#arrows{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.glyphicon{
+    font-size: 5rem;
+    color: rgb(206, 255, 249);
+
+
+}
+.glyphicon:hover{
+    font-size: 5rem;
+    color: rgb(126, 193, 255);
+
+
+}
+#arrow-right #arrow-left{
+    
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#arrow-right:hover #arrow-left:hover{
+    color: rgb(148, 205, 255);
+    display: flex;
+    font-size: 5rem;
+    justify-content: center;
+    align-items: center;
+}
 .hide{
     visibility: hidden;
     display: none;
@@ -34,16 +66,18 @@ body {
     height: 60%;
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 #livePlayers {
     display: flex;
-    width: 100%;
-    height: 100%;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    flex-wrap: wrap;
-    justify-content: center;
+    width:50%;
+    height: 70%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    flex-direction: row;
+    justify-content: flex-start;
 }
 
 .livePlayersFooterContainer {
@@ -71,8 +105,8 @@ body {
 .playerCard {
     display: flex;
     cursor: pointer;
-    height: 49.5%;
-    width: 40%;
+    height: 100%;
+    width: 50%;
     background-size: cover;
     position: relative;
     flex-shrink: 0;
