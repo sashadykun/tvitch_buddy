@@ -62,32 +62,12 @@ var fortniteStatsObject = {};
 //All functions go down here:
 
 function init() {
-    $("#headerContainer").click(displayHome)
-    $("#arrow-right").click(scrollRight)
-    $("#arrow-left").click(scrollLeft)
     createAllPlayersArray(dotaPlayers, bfPlayers, fortniteTopPlayers, codPlayers);
     getOnlinePlayers();
 }
 
-function scrollRight(){
-    var elmnt = document.getElementById("livePlayers");
-    var w = elmnt.clientWidth
-    $('#livePlayers').animate({ scrollLeft: "+="+w }, "slow");
-    
-    // elmnt.scrollLeft += w;
-      
-}
-function scrollLeft(){
-    var elmnt = document.getElementById("livePlayers");
-    var w = elmnt.clientWidth
-    $('#livePlayers').animate({ scrollLeft: "-="+w }, "slow");
-    
-    // elmnt.scrollLeft += w;
-      
-}
 
 function createAllPlayersArray(firstObject, secondObject, thirdObject, fourthObject){
-    arrayOfPlayers=[]
     var newArray = [firstObject,secondObject,thirdObject,fourthObject]
     for (var arrayIndex = 0; arrayIndex < newArray.length; arrayIndex++){
         arrayOfPlayers.push(...Object.keys(newArray[arrayIndex]));
@@ -158,7 +138,6 @@ function recreateOnlinePlayerArrayToHaveOnlyOurGamePlayers() {
 }
 
 function makeOnlinePlayerObj(response) {
-    onlinePlayerArray=[]
     for (var i = 0; i < response.streams.length; i++) {
         var tempPlayerObj = {};
         var streamingGame = response.streams[i].game;
@@ -169,7 +148,6 @@ function makeOnlinePlayerObj(response) {
         tempPlayerObj.game = streamingGame;
         tempPlayerObj.thumbnail = thumbnail;
         tempPlayerObj.displayName = displayName;
-        
         onlinePlayerArray.push(tempPlayerObj);
     }
 }
@@ -273,7 +251,6 @@ function getCodPlayers(player, name) {
 
 function renderLivePlayersOnDom() {
     recreateOnlinePlayerArrayToHaveOnlyOurGamePlayers();
-    $(".livePlayers").empty()
     onlinePlayerArray.sort(function (a, b) { return 0.5 - Math.random() });
     for (let i = 0; i < onlinePlayerArray.length; i++) {
         let playerCard = $("<div>", {
@@ -290,7 +267,7 @@ function renderLivePlayersOnDom() {
             appendTo: $("#livePlayers"),
         })
         let nameCard = $("<div>", {
-            addClass: "nameCard",
+            addClass: "nameCard nameCard2",
             appendTo: playerCard
         })
         let displayName = $("<div>", {
@@ -319,45 +296,9 @@ function displayVideo(twitchName) {
     $('iframe').remove();
     $('#stats').remove();
     $('#footerContainer').remove();
-    $('#livePlayersContainer').remove();
     $('#headerContainer').remove();
-
-    $("#arrows").addClass("hide")
     $('.container').removeClass().addClass('containerVid');
     $('#livePlayersContainer').removeAttr().attr('id', 'livePlayers2')
-
-    $('.livePlayersFooterContainer').remove();
-    $('.containerVid').remove();
-
-    let videoContainer = $('<div>', {
-        class: 'containerVid',
-        appendTo: '.container'
-    })
-    let livePlayersContainer = $('<div>',  {
-        id: 'livePlayersContainer',
-        appendTo: '.container'
-    })
-    let livePlayersBar = $('<div>', {
-        id: 'livePlayers',
-        appendTo: '#livePlayersContainer'
-    })
-    
-    let loader = $('<div>', {
-        class: 'loader',
-        appendTo: '.containerVid'
-    })
-
-    setInterval(function(){
-        loader.removeClass('loader')
-    }, 3500)
-
-    renderLivePlayersOnDom();
-    livePlayersContainer.removeAttr('id').addClass('livePlayersFooterContainer')
-    livePlayersBar.removeAttr('id').addClass('livePlayersFooter')
-    $('.nameCard').removeClass('nameCard').addClass('nameCard2')
-
-
-
 
     $('.playerCard').removeClass('playerCard').addClass('playerCard2')
     var createIframe = $('<iframe>', {
@@ -372,26 +313,6 @@ function displayVideo(twitchName) {
             }),
         appendTo: $('.containerVid')
     })
-    // $('.loader').removeClass('loader')
-}
-
-function displayHome() {
-    console.log("clicked")
-    $("#arrows").removeClass("hide")
-    $('#livePlayers').empty()
-    $('iframe').remove();
-    $('#stats').remove();
-    $('#footerContainer').remove()
-    $('#headerContainer').remove();
-    $('.containerVid').removeClass().addClass('container');
-    $('#livePlayers2').removeAttr().attr('id', 'livePlayersContainer')
-    createAllPlayersArray(dotaPlayers, bfPlayers, fortniteTopPlayers, codPlayers);
-    getOnlinePlayers();
-
-    // $('.playerCard2').removeClass('playerCard2').addClass('playerCard')
-    
-    
-    
 }
 
 function displayStats(gameObj) {
