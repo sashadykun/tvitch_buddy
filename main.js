@@ -67,6 +67,7 @@ function init() {
     getOnlinePlayers();
     $("#arrow-right").click(scrollRight)
     $("#arrow-left").click(scrollLeft)
+    displaytIntroModal()
 }
 //
 // function init() {
@@ -76,6 +77,9 @@ function init() {
 //     createAllPlayersArray(dotaPlayers, bfPlayers, fortniteTopPlayers, codPlayers);
 //     getOnlinePlayers();
 // }
+function displaytIntroModal(){
+    $('#intro_modal').modal('show');
+}
 
 function scrollRight(){
     var elmnt = document.getElementById("livePlayers");

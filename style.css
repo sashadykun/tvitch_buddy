@@ -3,6 +3,12 @@ body {
     margin: 0;
     background-image: linear-gradient(to top right, rgb(0, 0, 0), #6441A4);
 }
+.modal-body > p {
+    font-size: 2rem;
+}
+.modal-content {
+    background-color: rgb(113, 90, 156);
+}
 .containerSecondPage{
     display: flex;
     justify-content: center;
