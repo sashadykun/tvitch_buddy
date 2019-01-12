@@ -5,40 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Twitch Stat Buddy</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Anton|Fjalla+One|Oswald|PT+Sans+Narrow" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="main.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="style.css">
+    <script src="main.js"></script>
 </head>
 <body>
-    <div class="container">
-        <div id=headerContainer> 
-            <div class='header'>
-                <div class='textBorder'>
-                    <div class='text'>Twitch Buddy</div>
+        <div id="intro_modal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h3 class="modal-title text-center ">Welcome to "Twitch Buddy"</h3>  
+                        </div>
+                        <div class="modal-body">
+                            <p class=" text-center ">Using this application You can watch "TWITCH" gamers streams and players statistics.To start watching: simply close this module and choose video from list using left and right arrow</p>
+                            <h4 class="text-center">Let's get started...</h4>
+                        </div>
+                        <div class="modal-footer text-center ">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Start</button>
+                        </div>      
+                    </div>
+        
                 </div>
+                        
+                        
             </div>
+    <div id="container" class="container1">
+            
+        <div id=headerContainer> 
+                
+            <div class='text'>Twitch Buddy</div>
         </div>
-        <div id="livePlayers">
+        <div id="livePlayersContainer" class="livePlayersContainer">
+                
+                <div id="livePlayers" class="livePlayers"></div>
+                <div id="arrows"><div id="arrow-left"><div class="glyphicon glyphicon-chevron-left"></div></div>
+                <div id="arrow-right"><div class="glyphicon glyphicon-chevron-right"></div></div></div>
+                
+        </div>
+        <div class="videoAndStatsContainer">
+            
         </div>
         <div id='footerContainer'>
-            <div class='footer'>
-                <div class="footBorder">
-                    <div class='pic1'> <img src="images/fortniteLogo.png"> </div>
-                </div>
-                <div class="footBorder">
-                    <div class='pic2'> <img src="images/Dota2Logo.png"> </div>
-                </div>
-                <div class="footBorder">
-                    <div class='pic3'> <img src="images/twitch.png"> </div>
-                </div>
-                <div class="footBorder">
-                    <div class='pic4'> <img src="images/COD4.png"> </div>
-                </div>
-                <div class="footBorder">
-                    <div class='pic5'> <img src="images/Battlefield1Logo.png"> </div>
-                </div>
-            </div>
+            <div class='pic'> <img src="images/fortniteLogo.png"> </div>
+            <div class='pic'> <img src="images/Dota2Logo.png"> </div>
+            <div class='pic'> <img src="images/twitch.png"> </div>
+            <div class='pic'> <img src="images/COD4.png"> </div>
+            <div class='pic'> <img src="images/Battlefield1Logo.png"> </div>
         </div>
     </div>
 </body>
