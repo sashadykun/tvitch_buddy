@@ -1,5 +1,5 @@
 # c9.18_hackathon2
-#Application name - Twitch Boody 
+#Application name - Twitch Buddy 
 
 Project involving the combination of different data sources into an application 
 
