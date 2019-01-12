@@ -331,7 +331,7 @@ function displayVideo(twitchName) {
     $('iframe').remove();
     $('#stats').remove();
     $('#footerContainer').removeClass().addClass("hide");
-    $('#headerContainer').removeClass().addClass("hide");
+    $('#headerContainer').removeClass().addClass();
     $('#container').removeClass().addClass('containerSecondPage');
     $('#livePlayersContainer').removeClass().addClass("livePlayersContainerSecondPage")
     $('.playerCard').removeClass().addClass("playerCardSecondPage")
@@ -346,7 +346,7 @@ function displayVideo(twitchName) {
             'scrolling': "no",
             'allowfullscreen': "true"
             }),
-        appendTo: $('#container')
+        appendTo: $('.videoAndStatsContainer')
     })
 }
 function displayHome() {
@@ -354,11 +354,11 @@ function displayHome() {
     console.log("clicked")
     $('.playerCard').removeClass().addClass("playerCard")
     $('#livePlayersContainer').removeClass().addClass("livePlayersContainer")
-    $('#livePlayers').empty()
+    $('#livePlayers').empty().addClass("livePlayers")
     $('iframe').remove();
     $('#stats').remove();
     $('#footerContainer').removeClass("hide")
-    $('#headerContainer').removeClass();
+    $('#headerContainer').removeClass('hide');
     $('#container').removeClass().addClass("container1");
     $('#livePlayers2').removeAttr().attr('id', 'livePlayersContainer')
     arrayOfPlayers=[]
