@@ -67,6 +67,8 @@ body {
     display: flex;
     height: 35vh;
     width: 100%;
+    align-items: center;
+    justify-content: center;
 }
 
 .livePlayersContainer{
