@@ -1,5 +1,8 @@
 ###Application name - Twitch Buddy 
 
+## DEMO URL
+- http://sashadykun.com/twitch_buddy/
+
 ##Overview
 
 Project is involving the combination of 4 different API sources into an application where You can watch "TWITCH" gamer's streams and player's statistics.
