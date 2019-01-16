@@ -152,8 +152,10 @@ function getOnlinePlayers() {
     }
     $.ajax(settings).done(function (response) {
         makeOnlinePlayerObj(response);
+        
         renderLivePlayersOnDom();
     });
+    
 }
 
 function recreateOnlinePlayerArrayToHaveOnlyOurGamePlayers() {
@@ -284,6 +286,7 @@ function getCodPlayers(player, name) {
 }
 
 function renderLivePlayersOnDom() {
+    
     recreateOnlinePlayerArrayToHaveOnlyOurGamePlayers();
     onlinePlayerArray.sort(function (a, b) { return 0.5 - Math.random() });
     for (let i = 0; i < onlinePlayerArray.length; i++) {
@@ -293,17 +296,24 @@ function renderLivePlayersOnDom() {
             on: {
                 click: function () {
                     let streamName = onlinePlayerArray[i].displayName
+                    
+                    
+                    
                     displayVideo(streamName);
+                    
                     let gameName = onlinePlayerArray[i].game;
                     gameDataFetch(gameName, streamName)
                 }
             },
+            
             appendTo: $("#livePlayers"),
         })
+        
         let nameCard = $("<div>", {
             addClass: "nameCard nameCard2",
             appendTo: playerCard
         })
+        
         let displayName = $("<div>", {
             addClass: "name",
             text: onlinePlayerArray[i].displayName,
@@ -323,19 +333,31 @@ function renderLivePlayersOnDom() {
                 appendTo: nameCard
             })
         }
+        
     }
+    
 }
 
 function displayVideo(twitchName) {
+    let loader = $('<div>', {
+        class: 'loader',
+        appendTo: '#container'
+    })
+    setTimeout(function () {
+        loader.removeClass('loader').css('display', 'none')
+    }, 3000)
+    $('.loader').removeClass('hide')
     $("#arrows").removeClass("hide").addClass("hide")
     $('iframe').remove();
     $('#stats').remove();
+    
     $('#footerContainer').removeClass().addClass("hide");
     $('#headerContainer').removeClass().addClass();
     $('#container').removeClass().addClass('containerSecondPage');
     $('#livePlayersContainer').removeClass().addClass("livePlayersContainerSecondPage")
     $('.playerCard').removeClass().addClass("playerCardSecondPage")
     $('#livePlayers').removeClass().addClass('livePlayersSecondPage')
+    
     var createIframe = $('<iframe>', {
         addClass: 'currentVideo',
         attr: ({
@@ -348,8 +370,11 @@ function displayVideo(twitchName) {
             }),
         appendTo: $('.videoAndStatsContainer')
     })
+    
+    
 }
 function displayHome() {
+    
     $("#arrows").removeClass("hide")
     console.log("clicked")
     $('.playerCard').removeClass().addClass("playerCard")
@@ -364,8 +389,9 @@ function displayHome() {
     arrayOfPlayers=[]
     onlinePlayerArray=[]
     createAllPlayersArray(dotaPlayers, bfPlayers, fortniteTopPlayers, codPlayers);
+    
     getOnlinePlayers();
-
+    
     // $('.playerCard2').removeClass('playerCard2').addClass('playerCard')
     
     
@@ -373,6 +399,11 @@ function displayHome() {
 }
 
 function displayStats(gameObj) {
+    $('#stats').remove();
+    
+    // setTimeout(function () {
+    //     loader.removeClass('loader').css('display', 'none')
+    // }, 2500)
     var overallStatsDiv = $('<div>').attr('id', 'stats')
     for (var key in gameObj) {
         var statsCont = $('<div>').addClass('statCard');
@@ -382,6 +413,7 @@ function displayStats(gameObj) {
         overallStatsDiv.append(statsCont);
     }
     $('#container').append(overallStatsDiv)
+    
 }
 
 function gameDataFetch(game, streamName) {
