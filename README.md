@@ -1,7 +1,7 @@
 ###Application name - Twitch Buddy 
 
 ## DEMO URL
-- http://sashadykun.com/twitch_buddy/
+- https://sashadykun.com/twitch_buddy/
 
 ##Overview
 
